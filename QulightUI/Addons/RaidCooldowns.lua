@@ -17,11 +17,11 @@ local timer = 0
 local bars = {}
 
 AnchorRaidCD = CreateFrame("Frame","Move_RaidCD",UIParent)
-AnchorRaidCD:SetPoint("TOPLEFT", 40, -400)
+AnchorRaidCD:SetPoint("TOPLEFT", 3, -25)
 CreateAnchor(AnchorRaidCD, "Move RaidCD", 186 + 32, 192)
 
 local RaidCDAnchor = CreateFrame("Frame", "RaidCDAnchor", UIParent)
-RaidCDAnchor:SetPoint("BOTTOM", AnchorRaidCD)
+RaidCDAnchor:SetPoint("TOP", AnchorRaidCD)
 RaidCDAnchor:SetSize(186 + 32, 20)
 
 local FormatTime = function(time)
@@ -45,7 +45,7 @@ local UpdatePositions = function()
 		if i == 1 then
 			bars[i]:SetPoint("BOTTOMRIGHT", RaidCDAnchor, "BOTTOMRIGHT", -2, 2)
 		else
-			bars[i]:SetPoint("BOTTOMLEFT", bars[i-1], "TOPLEFT", 0, 13)
+			bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, -5)
 		end
 		bars[i].id = i
 	end
@@ -81,9 +81,9 @@ end
 
 local OnMouseDown = function(self, button)
 	if button == "LeftButton" then
-		if GetRealNumRaidMembers() > 0 then
+		if GetNumGroupMembers() > 0 then --fix issue #1
 			SendChatMessage(sformat("CD: ".." %s: %s", self.left:GetText(), self.right:GetText()), "RAID")
-		elseif GetRealNumPartyMembers() > 0 and not UnitInRaid("player") then
+		elseif GetNumGroupMembers() > 0 and not UnitInRaid("player") then --fix issue #1
 			SendChatMessage(sformat("CD: ".." %s: %s", self.left:GetText(), self.right:GetText()), "PARTY")
 		else
 			SendChatMessage(sformat("CD: ".." %s: %s", self.left:GetText(), self.right:GetText()), "SAY")
@@ -130,12 +130,11 @@ local CreateBar = function()
 	bar.icon.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
 	CreateStyle(bar.icon.backdrop, 2)
 	bar.icon.backdrop:SetFrameStrata("BACKGROUND")
-	
+
 	return bar
 end
-raid_spells = {
+raid_spells = { --TODO add more skills
 		[20484] = 600,	-- Rebirth
-		[113269] = 600,	-- Rebirth (Symbiosis)
 		[61999] = 600,	-- Raise Ally
 		[20707] = 600,	-- Soulstone
 		[126393] = 600,	-- Eternal Guardian

@@ -67,8 +67,8 @@ HidePortrait = function(self, unit)
 end
 local channelingTicks = {
 	-- warlock
-	[GetSpellInfo(689)] = 5, -- drain life
-	[GetSpellInfo(5740)] = 4, -- rain of fire
+	[GetSpellInfo(689)] = 6, -- drain life
+	[GetSpellInfo(103103)] = 4, -- drain soul
 	-- druid
 	[GetSpellInfo(740)] = 4, -- Tranquility
 	[GetSpellInfo(16914)] = 10, -- Hurricane

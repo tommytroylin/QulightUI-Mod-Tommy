@@ -520,9 +520,6 @@ for i = 1, NUM_CHAT_WINDOWS do
 	button:SetAlpha(0)
 	CreateStyle(button, 2)
 
-	
-	
-	
 	button:SetScript("OnMouseUp", function(self)
 		Copy(cf)
 	end)

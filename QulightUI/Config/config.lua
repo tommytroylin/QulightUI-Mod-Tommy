@@ -1,10 +1,10 @@
 ﻿Qulight["media"] = {
-	["font"] = [=[Interface\Addons\QulightUI\Root\Media\qFont.ttf]=], 			        -- main font in Qulight UI
-	["pxfont"] = [=[Interface\Addons\QulightUI\Root\Media\pxFont.ttf]=],
-	["fontsize"] = 10, 														    		-- size of font 
+	["font"] = [=[Fonts\Font.ttf]=], 			        -- main font in Qulight UI
+	["pxfont"] = [=[Fonts\Font.ttf]=],
+	["fontsize"] = 10, 														    		-- size of font
 	["texture"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\statusbar4",				-- main texture in Qulight UI
 	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
-	["glow"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\glowTex",	
+	["glow"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\glowTex",
 }
 Qulight["general"] = {
 	["AutoScale"] = true,  																-- mainly enabled for users that don't want to mess with the config file
@@ -13,8 +13,8 @@ Qulight["general"] = {
 	["AutoRepair"] = false,																-- auto repair
 	["AutoGreed"] = false,
 	["topbottompanel"] = true,
-	["centerpanel"] = false,
-	["autoinvite"] = true,	
+	["centerpanel"] = true,
+	["autoinvite"] = true,
 	["AutoDisenchant"] = false,															-- auto dis green items
 	["BlizzardsErrorFrameHiding"] = true,												-- hide blizzard red errors
 }
@@ -27,7 +27,7 @@ Qulight["actionbar"] = {
 	["petbuttonsize"] = 32,                             -- pet & stance buttons size
 	["buttonspacing"] = 1,                              -- buttons spacing
 	["petbuttonspacing"] = 1,
-	["mainbarWidth"] = 10,		
+	["mainbarWidth"] = 12,
 	["ownshdbar"] = false,                              -- use a complete new stance bar for shadow dance (rogue only)
 }
 
@@ -39,13 +39,13 @@ Qulight["raidframes"] = {
 	["power"] = false,					-- Alpha of healthbars when 100%hp
 	["show_range"] = true,						-- Show range opacity for raidframes
 	["range_alpha"] = 0.5,						-- Alpha of unitframes when unit is out of range
-	["hp_value"] = true,						
-	["width"] = 80,						
-	["height"] = 30,						
+	["hp_value"] = true,
+	["width"] = 80,
+	["height"] = 30,
 
 	["show_party"] = true,						-- Show party frames
 	["show_raid"] = true,						-- Show raid frames
-	["solo_mode"] = false,					-- Show player frame always
+	["solo_mode"] = true,					-- Show player frame always
 	["player_in_party"] = true,					-- Show player frame in party
 	["raid_groups"] = 5,						-- Number of groups in raid
 	["raid_groups_vertical"] = false,			-- Vertical raid groups(only for heal layout)
@@ -60,15 +60,15 @@ Qulight["raidframes"] = {
 	["plugins_aura_watch_timer"] = true,		-- Timer on raid debuff icons
 	["plugins_healcomm"] = true,				-- Incoming heal bar on raid frame
 	["plugins_auto_resurrection"] = false,		-- Auto cast resurrection on middle click when the unit is dead(doesn't work with Clique enabled)
-	
+
 	["own_color"] = true,
 	["fontsize"] = 10,
     ["fontsizeEdge"] = 12,
     ["outline"] = "OUTLINE",
 	["bar_color_value"] = false,
-	["color_value"] = false,		
+	["color_value"] = false,
 	["plugins_smooth_bar"] = true,				-- Smooth bar
-	["show_timer"] = true,		
+	["show_timer"] = true,
 	["show_spiral"] = false,					-- Spiral on aura icons
 	["debuff_color_type"] = true,				-- Color debuff by type
 }
@@ -76,7 +76,7 @@ Qulight["unitframes"] = {
 	["enable"] = true,																	-- enable/disable action bars
 	["HealthcolorClass"] = false,														-- health color = class color
 	["bigcastbar"] = true,
-		["widthbigcastbar"] = 320,
+		["widthbigcastbar"] = 340,
 		["heightbigcastbar"] = 20,
 	["Powercolor"] = true,																-- power color = class color
 	["showtot"] = true, 																-- show target of target frame
@@ -97,12 +97,12 @@ Qulight["unitframes"] = {
 	["showShardbar"] = true, 															-- show warlock soulShard bar
 	["Castbars"] = true, 																-- use built-in castbars
 }
-Qulight["chatt"] = {				 
+Qulight["chatt"] = {
 	["enable"] = true,																	-- enable/disable chat
 	["chatbar"] = false,																-- enable/disable chatbar
 }
 Qulight["buffdebuff"] = {
-	["enable"] = true,  
+	["enable"] = true,
 	["iconsize"] = 35, 																	-- buffs size
 	["timefontsize"] = 10, 																-- time font size
 	["countfontsize"] = 10,  															-- count font size
@@ -140,7 +140,7 @@ Qulight["datatext"] = {
 	["Time24"] = true,            														-- set time to 24h format(if wowtime enable)
 	["Localtime"] = true,  																-- local time(if wowtime enable)
 	["classcolor"] = true,																-- class color text info
-	["color"] = { .7, .7, .7, 1 }, 														-- if ["classcolor"] = false,	
+	["color"] = { .7, .7, .7, 1 }, 														-- if ["classcolor"] = false,
 }
 Qulight["nameplate"] = {
 	["enable"] = true, 							-- Enable nameplate
@@ -176,7 +176,7 @@ Qulight["tooltip"] = {
 	["title"] = false,	-- show speel id
 }
 Qulight["bags"] = {
-	["Enable"] = true,																	-- enable/disable bags 
+	["Enable"] = true,																	-- enable/disable bags
 	["buttonsize"] = 32,																	-- Buttons size
 	["buttonspace"] = 3,																	-- Buttons space
 	["bankcolumns"] = 17,																	-- Horizontal number of columns in bank
@@ -190,16 +190,16 @@ Qulight["cooldown"] = {
 	["enable"] = true,                     												-- enable/disable cooldown addon(for buttons)
 }
 Qulight["misk"] = {
-	["addonmanager"] = true,														-- enable disable addonmanager	
+	["addonmanager"] = true,														-- enable disable addonmanager
 	["armory_link"] = false,															-- enable armory_link
-	["filger"] = true,																	-- enable disable filger
+	["filger"] = false,																	-- enable disable filger
 	["classtimer"] = false,																-- enable disable classtimer
 	["BuffReminderRaidBuffs"] = true,													-- enable disable raid buffs reminder
 	["Reminder"] = true,																-- enable disable reminder(self buff)
 	["CooldownFlash"] = true,															-- enable disable cooldown flash
-	["raidcooldowns"] = false, 
+	["raidcooldowns"] = true,
 	["AutoScreen"] = true,
 	["Threatbar"] = true,
-	["raidmarker"] = false,
-	["raidutility"] = false,														-- enable disable raid utility
-}  
+	["raidmarker"] = true,
+	["raidutility"] = true,														-- enable disable raid utility
+}

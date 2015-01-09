@@ -220,7 +220,7 @@ Anchortarget:SetPoint("TOPLEFT", UIParent, "BOTTOM", 213, 300)
 CreateAnchor(Anchortarget, "Move target", 220, 38)
 
 Anchorraid = CreateFrame("Frame","Move_raid",UIParent)
-Anchorraid:SetPoint("BOTTOMRIGHT", -17, -11)
+Anchorraid:SetPoint("TOPLEFT", 186+62, -25)
 CreateAnchor(Anchorraid, "Move raid", 420, 180)
 
 Anchortot = CreateFrame("Frame","Move_tot",UIParent)
@@ -233,7 +233,7 @@ CreateAnchor(Anchorpet, "Move pet", 100, 28)
 
 if Qulight["unitframes"].bigcastbar then
 	Anchorplayercastbar = CreateFrame("Frame","Move_playercastbar",UIParent)
-	Anchorplayercastbar:SetPoint("BOTTOM", UIParent, "BOTTOM", -1, 318)
+	Anchorplayercastbar:SetPoint("BOTTOM", UIParent, "BOTTOM", -1, 218)
 	CreateAnchor(Anchorplayercastbar, "Move playercastbar", 327, 18)
 
 	Anchortargetcastbar = CreateFrame("Frame","Move_targetcastbar",UIParent)
@@ -242,15 +242,15 @@ if Qulight["unitframes"].bigcastbar then
 end
 
 Anchorfocus = CreateFrame("Frame","Move_focus",UIParent)
-Anchorfocus:SetPoint("BOTTOMLEFT", 435, 400) 
+Anchorfocus:SetPoint("BOTTOMLEFT", 435, 400)
 CreateAnchor(Anchorfocus, "Move focus", 180, 34)
 
 Anchorfocuscastbar = CreateFrame("Frame","Move_focuscastbar",UIParent)
-Anchorfocuscastbar:SetPoint("BOTTOMLEFT", 457, 440) 
+Anchorfocuscastbar:SetPoint("BOTTOMLEFT", 457, 440)
 CreateAnchor(Anchorfocuscastbar, "Move focuscastbar", 155, 13)
 
 Anchortank = CreateFrame("Frame","Move_tank",UIParent)
-Anchortank:SetPoint("BOTTOMLEFT", 250, 450)
+Anchortank:SetPoint("TOPLEFT", Anchorraid ,"BOTTOMLEFT", 0, -15)
 CreateAnchor(Anchortank, "Move tank", 80, 18)
 
 Anchorboss = CreateFrame("Frame","Move_boss",UIParent)
