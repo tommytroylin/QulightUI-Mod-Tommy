@@ -2,7 +2,7 @@
 
 local function CreateBackdrop(f, t, tex)
 	if f.backdrop then return end
-	
+
 	local b = CreateFrame("Frame", nil, f)
 	b:SetPoint("TOPLEFT", -2, 2)
 	b:SetPoint("BOTTOMRIGHT", 2, -2)
@@ -13,7 +13,7 @@ local function CreateBackdrop(f, t, tex)
 	else
 		b:SetFrameLevel(0)
 	end
-	
+
 	f.backdrop = b
 end
 
@@ -45,7 +45,7 @@ local titleBG = {
 barmod.ApplySettings_ = barmod.ApplySettings
 barmod.ApplySettings = function(self, win)
 	barmod.ApplySettings_(self, win)
-	
+
 	local skada = win.bargroup
 
 	if win.db.enabletitle then
@@ -57,7 +57,7 @@ barmod.ApplySettings = function(self, win)
 	skada:SetSpacing(barSpacing)
 	skada:SetFont(Qulight["media"].font, 10)
 	skada:SetFrameLevel(5)
-	
+
 	skada:SetBackdrop(nil)
 	if not skada.backdrop then
 		CreateBackdrop(skada)
@@ -65,7 +65,7 @@ barmod.ApplySettings = function(self, win)
 		skada.backdrop:SetPoint('TOPLEFT', win.bargroup.button or win.bargroup, 'TOPLEFT', -2, 2)
 		skada.backdrop:SetPoint('BOTTOMRIGHT', win.bargroup, 'BOTTOMRIGHT', 2, -2)
 	end
-	
+
 	hooksecurefunc(Skada, "OpenReportWindow", function(self)
 		if not self.ReportWindow.frame.reskinned then
 			StripTextures(self.ReportWindow.frame)

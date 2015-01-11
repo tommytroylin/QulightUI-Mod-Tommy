@@ -8,7 +8,7 @@ function StyleButton(self)
 	local name = self:GetName()
 
 	if name:match("MultiCast") then return end
-	
+
 	local action = self.action
 	local Button = self
 	local Icon = _G[name.."Icon"]
@@ -19,20 +19,20 @@ function StyleButton(self)
 	local Btname = _G[name.."Name"]
 	local normal  = _G[name.."NormalTexture"]
 	local BtnBG = _G[name..'FloatingBG']
- 
+
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
- 
+
 	if float then
 		float:Hide()
 		float = dummy
 	end
- 
+
 	if Border then
 		Border:Hide()
 		Border = dummy
 	end
- 
+
 	Count:ClearAllPoints()
 	Count:SetPoint("BOTTOMRIGHT", 0, 2)
 	Count:SetFont(Qulight["media"].pxfont, 12, "OUTLINE")
@@ -41,7 +41,7 @@ function StyleButton(self)
 		Btname:SetText("")
 		Btname:Hide()
 	end
- 
+
 	if not _G[name.."Panel"] then
 
 		if self:GetHeight() ~= buttonsize and not InCombatLockdown() then --Taint fix for Flyout Buttons
@@ -53,7 +53,7 @@ function StyleButton(self)
 		CreateStyle(panel, 2)
 		panel:SetFrameStrata(self:GetFrameStrata())
 		panel:SetFrameLevel(self:GetFrameLevel() - 1)
- 
+
 		Icon:SetTexCoord(.08, .92, .08, .92)
 		Icon:SetPoint("TOPLEFT", Button, 2, -2)
 		Icon:SetPoint("BOTTOMRIGHT", Button, -2, 2)
@@ -64,21 +64,21 @@ function StyleButton(self)
 	HotKey:SetFont(Qulight["media"].pxfont, 12, "OUTLINE")
 	HotKey.ClearAllPoints = dummy
 	HotKey.SetPoint = dummy
- 
+
 	if not Qulight["actionbar"].hotkey == true then
 		HotKey:SetText("")
 		HotKey:Hide()
 	end
-	
+
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
-	
+
 	if BtnBG then
 		BtnBG:Hide()
-	end 
+	end
 end
 -- used to update pet bar buttons
 QuPetBarUpdate = function(self, event)
@@ -90,7 +90,7 @@ QuPetBarUpdate = function(self, event)
 		petAutoCastableTexture = _G[buttonName.."AutoCastable"]
 		petAutoCastShine = _G[buttonName.."Shine"]
 		local name, subtext, texture, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
-		
+
 		if not isToken then
 			petActionIcon:SetTexture(texture)
 			petActionButton.tooltipName = name
@@ -98,7 +98,7 @@ QuPetBarUpdate = function(self, event)
 			petActionIcon:SetTexture(_G[texture])
 			petActionButton.tooltipName = _G[name]
 		end
-		
+
 		petActionButton.isToken = isToken
 		petActionButton.tooltipSubtext = subtext
 
@@ -114,39 +114,39 @@ QuPetBarUpdate = function(self, event)
 			end
 		else
 			petActionButton:SetChecked()
-			
+
 			if PetActionBackdrop then
 				PetActionBackdrop:SetBackdropBorderColor(parent:GetBackdropBorderColor())
 			end
 
 			if IsPetAttackAction(i) then
 				PetActionButton_StopFlash(petActionButton)
-			end			
+			end
 		end
-		
+
 		if autoCastAllowed then
 			petAutoCastableTexture:Show()
 		else
 			petAutoCastableTexture:Hide()
 		end
-		
+
 		if autoCastEnabled then
 			AutoCastShine_AutoCastStart(petAutoCastShine)
 		else
 			AutoCastShine_AutoCastStop(petAutoCastShine)
 		end
-		
+
 		-- grid display
 		if name then
 			if not Qulight["actionbar"].showgrid then
 				petActionButton:SetAlpha(1)
-			end			
+			end
 		else
 			if not Qulight["actionbar"].showgrid then
 				petActionButton:SetAlpha(0)
 			end
 		end
-		
+
 		if texture then
 			if GetPetActionSlotUsable(i) then
 				SetDesaturation(petActionIcon, nil)
@@ -157,7 +157,7 @@ QuPetBarUpdate = function(self, event)
 		else
 			petActionIcon:Hide()
 		end
-		
+
 		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
 			PetActionButton_StopFlash(petActionButton)
 			SetDesaturation(petActionIcon, 1)
@@ -172,11 +172,11 @@ local replace = string.gsub
 
 function StyleActionBarButton(self)
 	local name = self:GetName()
-	
+
 	if name:match("MultiCast") then return end
-	
+
 	if name:match("ExtraActionButton") then return end
-	
+
 	local action = self.action
 	local Button = self
 	local Icon = _G[name.."Icon"]
@@ -187,20 +187,20 @@ function StyleActionBarButton(self)
 	local Btname = _G[name.."Name"]
 	local normal  = _G[name.."NormalTexture"]
 	local BtnBG = _G[name..'FloatingBG']
- 
+
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
- 
+
 	if Border then
 		Border:Hide()
 		Border = dummy
 	end
-	
+
 	if float then
 		float:Hide()
 		float = dummy
 	end
-	
+
 	Count:ClearAllPoints()
 	Count:SetPoint("BOTTOMRIGHT", 0, 2)
 	Count:SetFont(Qulight["media"].pxfont, 10, "OUTLINE")
@@ -209,7 +209,7 @@ function StyleActionBarButton(self)
 		Btname:SetText("")
 		Btname:Hide()
 	end
- 
+
 	if not _G[name.."Panel"] then
 
 		if self:GetHeight() ~= buttonsize and not InCombatLockdown() then --Taint fix for Flyout Buttons
@@ -221,7 +221,7 @@ function StyleActionBarButton(self)
 		CreateStyle(panel, 2)
 		panel:SetFrameStrata(self:GetFrameStrata())
 		panel:SetFrameLevel(self:GetFrameLevel() - 1)
- 
+
 		Icon:SetTexCoord(.08, .92, .08, .92)
 		Icon:SetPoint("TOPLEFT", Button, 2, -2)
 		Icon:SetPoint("BOTTOMRIGHT", Button, -2, 2)
@@ -232,35 +232,35 @@ function StyleActionBarButton(self)
 	HotKey:SetFont(Qulight["media"].pxfont, 10, "OUTLINE")
 	HotKey.ClearAllPoints = dummy
 	HotKey.SetPoint = dummy
- 
+
 	if not Qulight["actionbar"].hotkey == true then
 		HotKey:SetText("")
 		HotKey:Hide()
 	end
- 
+
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
-	
+
 	if BtnBG then
 		BtnBG:Hide()
-	end 
+	end
 end
 
 function StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	button:SetNormalTexture("")
-	
+
 	button.SetNormalTexture = dummy
-	
+
 	local Flash	 = _G[name.."Flash"]
 	Flash:SetTexture("")
-	
+
 	if not _G[name.."Panel"] then
 		button:SetWidth(petbuttonsize)
 		button:SetHeight(petbuttonsize)
-		
+
 		local panel = CreateFrame("Frame", name.."Panel", button)
 		CreatePanel(panel, petbuttonsize, petbuttonsize, "CENTER", button, "CENTER", 0, 0)
 		panel:SetFrameStrata(button:GetFrameStrata())
@@ -268,7 +268,7 @@ function StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 		CreateStyle(panel, 2)
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
-		if pet then			
+		if pet then
 			if petbuttonsize < 30 then
 				local autocast = _G[name.."AutoCastable"]
 				autocast:SetAlpha(0)
@@ -284,7 +284,7 @@ function StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 			icon:SetPoint("BOTTOMRIGHT", button, -2, 2)
 		end
 	end
-	
+
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
@@ -318,7 +318,7 @@ function UpdateActionBarHotKey(self, actionButtonType)
 
 	text = string.gsub(text, "(s%-)", "S")
 	text = string.gsub(text, "(a%-)", "A")
-	text = string.gsub(text, "(�%-)", "A") -- fix ruRU
+	text = string.gsub(text, "(�%-)", "A") -- fix ruRU
 	text = string.gsub(text, "(c%-)", "C")
 	text = string.gsub(text, "(Mouse Button )", "M")
 	text = string.gsub(text, "(Кнопка мыши )", "M")
@@ -351,11 +351,11 @@ for _, name in ipairs( buttonNames ) do
 		local buttonName = name .. tostring(index)
 		local button = _G[buttonName]
 		local cooldown = _G[buttonName .. "Cooldown"]
- 
+
 		if ( button == nil or cooldown == nil ) then
 			break
 		end
-		
+
 		cooldown:ClearAllPoints()
 		cooldown:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 		cooldown:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
@@ -379,14 +379,14 @@ SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
 function StyleActionBarFlyout(self)
 	if not self.FlyoutArrow then return end
-	
+
 	self.FlyoutBorder:SetAlpha(0)
 	self.FlyoutBorderShadow:SetAlpha(0)
-	
+
 	SpellFlyoutHorizontalBackground:SetAlpha(0)
 	SpellFlyoutVerticalBackground:SetAlpha(0)
 	SpellFlyoutBackgroundEnd:SetAlpha(0)
-	
+
 	for i=1, GetNumFlyouts() do
 		local x = GetFlyoutID(i)
 		local _, _, numSlots, isKnown = GetFlyoutInfo(x)
@@ -402,12 +402,12 @@ function StyleActionBarFlyout(self)
 	else
 		arrowDistance = 2
 	end
-	
+
 	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
-	
+
 	if self:GetAttribute("flyoutDirection") ~= nil then
 		local SetPoint, _, _, _, _ = self:GetParent():GetParent():GetPoint()
-		
+
 		if strfind(SetPoint, "BOTTOM") then
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
@@ -419,7 +419,7 @@ function StyleActionBarFlyout(self)
 		end
 	end
 end
-local function StyleButton123(button) 
+local function StyleButton123(button)
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture("frame", nil, self)
 		hover:SetTexture(1, 1, 1, 0.3)
@@ -464,7 +464,7 @@ do
 		StyleButton123(_G["MultiBarLeftButton"..i],true)
 		StyleButton123(_G["MultiBarRightButton"..i],true)
 	end
-		 
+
 	for i=1, 10 do
 		StyleButton123(_G["StanceButton"..i], true)
 		StyleButton123(_G["PetActionButton"..i], true)
@@ -510,26 +510,26 @@ local function StyleTotemFlyout(flyout)
 	flyout.middle:SetTexture(nil)
 
 	local last = nil
-	
+
 	for _,button in ipairs(flyout.buttons) do
 		CreateStyle(button, 2)
 		local icon = select(1,button:GetRegions())
 		icon:SetTexCoord(.09,.91,.09,.91)
 		icon:SetDrawLayer("ARTWORK")
 		icon:SetPoint("TOPLEFT",button,"TOPLEFT",2,-2)
-		icon:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)			
+		icon:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
 		if not InCombatLockdown() then
 			button:SetSize(30,30)
 			button:ClearAllPoints()
 			button:SetPoint("BOTTOM",last,"TOP",0,4)
-		end			
+		end
 		if button:IsVisible() then last = button end
 		button:SetBackdropBorderColor(flyout.parent:GetBackdropBorderColor())
 		StyleButton(button)
 	end
-	
+
 	flyout.buttons[1]:SetPoint("BOTTOM",flyout,"BOTTOM")
-	
+
 	if flyout.type == "slot" then
 		local tcoords = SLOT_EMPTY_TCOORDS[flyout.parent:GetID()]
 		flyout.buttons[1].icon:SetTexCoord(tcoords.left,tcoords.right,tcoords.top,tcoords.bottom)
@@ -543,15 +543,15 @@ local function StyleTotemFlyout(flyout)
 	close:GetNormalTexture():SetTexture(nil)
 	close:ClearAllPoints()
 	close:SetPoint("BOTTOMLEFT",last,"TOPLEFT",0,4)
-	close:SetPoint("BOTTOMRIGHT",last,"TOPRIGHT",0,4)	
+	close:SetPoint("BOTTOMRIGHT",last,"TOPRIGHT",0,4)
 	close:SetHeight(8)
-	
+
 	close:SetBackdropBorderColor(last:GetBackdropBorderColor())
 	flyout:ClearAllPoints()
 	flyout:SetPoint("BOTTOM",flyout.parent,"TOP",0,4)
 end
 hooksecurefunc("MultiCastFlyoutFrame_ToggleFlyout",function(self) StyleTotemFlyout(self) end)
-	
+
 local function StyleTotemOpenButton(button, parent)
 	button:GetHighlightTexture():SetTexture(nil)
 	button:GetNormalTexture():SetTexture(nil)
@@ -570,7 +570,7 @@ local function StyleTotemOpenButton(button, parent)
 		button.visibleBuhighlight:SetPoint("BOTTOMRIGHT",button.visibleBut,"BOTTOMRIGHT",-1,1)
 		CreateStyle(button.visibleBut, 2)
 	end
-	
+
 	button.visibleBut:SetBackdropBorderColor(parent:GetBackdropBorderColor())
 end
 hooksecurefunc("MultiCastFlyoutFrameOpenButton_Show",function(button,_, parent) StyleTotemOpenButton(button, parent) end)
@@ -636,7 +636,7 @@ hooksecurefunc("MultiCastRecallSpellButton_Update", function(self) StyleTotemSpe
 --	Make ExtraActionBarFrame movable(use macro /click ExtraActionButton1)
 ------------------------------------------------------------------------------------------
 AnchorExtraActionBar = CreateFrame("Frame","Move_ExtraActionBar",UIParent)
-AnchorExtraActionBar:SetPoint("BOTTOM", 172, 380)
+AnchorExtraActionBar:SetPoint("BOTTOM", 172, 340)
 CreateAnchor(AnchorExtraActionBar, "Move ExtraActionBar", 40, 40)
 
 ExtraActionBarFrame:SetParent(UIParent)

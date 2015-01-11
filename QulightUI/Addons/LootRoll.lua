@@ -319,7 +319,7 @@ local function CHAT_MSG_LOOT(msg)
 	end
 end
 AnchorLootRoll = CreateFrame("Frame","Move_LootRoll",UIParent)
-AnchorLootRoll:SetPoint("RIGHT", -100, 200)
+AnchorLootRoll:SetPoint("CENTER", 0, 300)
 CreateAnchor(AnchorLootRoll, "Move LootRoll", 250, 25)
 
 anchor:RegisterEvent("ADDON_LOADED")

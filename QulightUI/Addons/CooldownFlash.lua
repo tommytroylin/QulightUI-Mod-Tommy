@@ -13,13 +13,13 @@ local filter = {
 	},
 }
 local shadows = {
-	edgeFile = "Interface\\AddOns\\QulightUI\\media\\Other\\glowTex", 
+	edgeFile = "Interface\\AddOns\\QulightUI\\media\\Other\\glowTex",
 	edgeSize = 4,
 	insets = { left = 3, right = 3, top = 3, bottom = 3 }
 }
 
 Anchorflash = CreateFrame("Frame","Move_flash_icon",UIParent)
-Anchorflash:SetPoint("CENTER", UIParent, 0, 80) 
+Anchorflash:SetPoint("CENTER", UIParent, 0, -250)
 CreateAnchor(Anchorflash, "Move flash icon", 80, 80)
 
 local flash = CreateFrame("Frame", nil, UIParent)
@@ -30,9 +30,9 @@ flash:SetScript("OnEvent", function()
 	flash:SetPoint("CENTER", Anchorflash)
 	flash:SetSize(scale(80),scale(80))
 	flash:SetBackdrop({
-	  bgFile = [[Interface\AddOns\QulightUI\Root\Media\solid]], 
-	  edgeFile = [[Interface\AddOns\QulightUI\Root\Media\solid]], 
-	  tile = false, tileSize = 0, edgeSize = mult, 
+	  bgFile = [[Interface\AddOns\QulightUI\Root\Media\solid]],
+	  edgeFile = [[Interface\AddOns\QulightUI\Root\Media\solid]],
+	  tile = false, tileSize = 0, edgeSize = mult,
 	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}
 	})
 	flash:SetBackdropColor(.06,.06,.06,0)

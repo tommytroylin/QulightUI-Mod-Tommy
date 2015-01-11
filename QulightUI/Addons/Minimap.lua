@@ -25,15 +25,15 @@ if classcolors == true then
 	color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2,UnitClass("player"))]
 else
 	color = {r=255/255, g=255/255, b=255/255 } -- own textcolor
-end	
+end
 
 local oldOnClick = Minimap:GetScript("OnMouseUp")
 Minimap:SetScript("OnMouseUp", function(self,click)
 	if(click=="RightButton") then
 		ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "cursor", 0, 0)
 	elseif(click=="MiddleButton") then
-		if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle() 
-	else 
+		if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle()
+	else
 		oldOnClick(self)
 	end
 end)
@@ -92,7 +92,7 @@ local function StripTextures(object, kill)
 				region:SetTexture(nil)
 			end
 		end
-	end		
+	end
 end
 --[[ BG icon ]]
 
@@ -122,7 +122,7 @@ MiniMapMailBorder:Hide()
 GarrisonLandingPageMinimapButton:ClearAllPoints()
 GarrisonLandingPageMinimapButton:SetParent(Minimap)
 GarrisonLandingPageMinimapButton:SetSize(35,35)
-GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
+GarrisonLandingPageMinimapButton:SetPoint("BOTTOMLEFT", 0, 0)
 
 MiniMapTracking:ClearAllPoints()
 MiniMapTracking:SetParent(Minimap)
@@ -141,7 +141,7 @@ qMap:RegisterEvent("ADDON_LOADED")
 qMap:SetScript("OnEvent", function(self, event, addon)
 
     qMap.tracking = CreateFrame("Frame", nil, Minimap)
-	
+
 	MiniMapTrackingButton:SetScript("OnEnter",function()
 		MiniMapTracking:SetAlpha(1)
         qMap.tracking:SetAlpha(1)
@@ -151,17 +151,17 @@ qMap:SetScript("OnEvent", function(self, event, addon)
         MiniMapTracking:SetAlpha(0)
         qMap.tracking:SetAlpha(0)
     end)
-	
+
 	MiniMapTrackingButton:SetScript("OnLeave", function()
         MiniMapTracking:SetAlpha(0)
         qMap.tracking:SetAlpha(0)
     end)
-	
+
 	MiniMapTrackingButton:SetScript("OnMouseUp", function(self,click)
 	    if(click=="RightButton") then
 		    ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "cursor", 0, 0)
 		elseif(click=="MiddleButton") then
-			if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle() 
+			if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle()
 		end
 	end)
 	qMap.tracking.text = t
@@ -242,7 +242,7 @@ TimeManagerClockButton:SetScript('OnClick', function(self, button)
 	else
 		ToggleCalendar()
 	end
-end)  
+end)
 TimeManagerFrame:ClearAllPoints()
 TimeManagerFrame:SetPoint("CENTER", Minimap, "CENTER", 0, 0)
 TimeManagerFrame:SetClampedToScreen(true)
@@ -257,8 +257,8 @@ SLASH_CALENDAR2 = "/calendar"
 local cal = CreateFrame("Frame", nil, Minimap)
 GameTimeFrame:HookScript("OnShow", cal.Show)
 GameTimeFrame:SetScript("OnEvent", function(self, event, addon)
-	
-	
+
+
 end)
 
 if CalendarGetNumPendingInvites() ~= 0 then
@@ -266,7 +266,7 @@ if CalendarGetNumPendingInvites() ~= 0 then
 	else
 		clockTime:SetTextColor(color.r, color.g, color.b)
 end
-	
+
 local config = {
 ["showPicomenu"] = true,
 }
@@ -284,8 +284,8 @@ local menuList = {
     {
         text = CHARACTER_BUTTON,
         icon = 'Interface\\PaperDollInfoFrame\\UI-EquipmentManager-Toggle',
-        func = function() 
-            securecall(ToggleCharacter, 'PaperDollFrame') 
+        func = function()
+            securecall(ToggleCharacter, 'PaperDollFrame')
         end,
                 tooltipTitle = 'MOOO',
         notCheckable = true,
@@ -293,7 +293,7 @@ local menuList = {
     {
         text = SPELLBOOK_ABILITIES_BUTTON,
         icon = 'Interface\\MINIMAP\\TRACKING\\Class',
-        func = function() 
+        func = function()
             securecall(ToggleSpellBook, BOOKTYPE_SPELL)
         end,
         notCheckable = true,
@@ -301,14 +301,14 @@ local menuList = {
     {
         text = TALENTS_BUTTON,
         icon = 'Interface\\MINIMAP\\TRACKING\\Ammunition',
-        func = function() 
-			if (not PlayerTalentFrame) then 
-                LoadAddOn('Blizzard_TalentUI') 
+        func = function()
+			if (not PlayerTalentFrame) then
+                LoadAddOn('Blizzard_TalentUI')
             end
 
-			if (not GlyphFrame) then 
-                LoadAddOn('Blizzard_GlyphUI') 
-            end 
+			if (not GlyphFrame) then
+                LoadAddOn('Blizzard_GlyphUI')
+            end
 
 			PlayerTalentFrame_Toggle()
         end,
@@ -317,15 +317,15 @@ local menuList = {
     {
         text = ACHIEVEMENT_BUTTON,
         icon = 'Interface\\AddOns\\QulightUI\\Root\\Media\\picomenu\\picomenuAchievement',
-        func = function() 
-            securecall(ToggleAchievementFrame) 
+        func = function()
+            securecall(ToggleAchievementFrame)
         end,
         notCheckable = true,
     },
     {
         text = QUESTLOG_BUTTON,
         icon = 'Interface\\GossipFrame\\ActiveQuestIcon',
-        func = function() 
+        func = function()
         	ToggleQuestLog()
         end,
         notCheckable = true,
@@ -334,7 +334,7 @@ local menuList = {
         text = GUILD,
         icon = 'Interface\\GossipFrame\\TabardGossipIcon',
         arg1 = IsInGuild('player'),
-        func = function() 
+        func = function()
             ToggleGuildFrame()
         end,
         notCheckable = true,
@@ -342,23 +342,23 @@ local menuList = {
     {
         text = SOCIAL_BUTTON,
         icon = 'Interface\\FriendsFrame\\PlusManz-BattleNet',
-        func = function() 
-            securecall(ToggleFriendsFrame, 1) 
+        func = function()
+            securecall(ToggleFriendsFrame, 1)
         end,
         notCheckable = true,
     },
     {
         --text = PLAYER_V_PLAYER,
         --icon = 'Interface\\MINIMAP\\TRACKING\\BattleMaster',
-        --func = function() 
-            --securecall(TogglePVPUI, 1) 
+        --func = function()
+            --securecall(TogglePVPUI, 1)
         --end,
         --notCheckable = true,
     },
     {
         text = DUNGEONS_BUTTON,
         icon = 'Interface\\MINIMAP\\TRACKING\\None',
-        func = function() 
+        func = function()
             securecall(ToggleLFDParentFrame)
         end,
         notCheckable = true,
@@ -366,7 +366,7 @@ local menuList = {
     {
         text = MOUNTS_AND_PETS,
         icon = 'Interface\\MINIMAP\\TRACKING\\StableMaster',
-        func = function() 
+        func = function()
             securecall(TogglePetJournal)
         end,
         notCheckable = true,
@@ -374,7 +374,7 @@ local menuList = {
     {
         text = RAID,
         icon = 'Interface\\TARGETINGFRAME\\UI-TargetingFrame-Skull',
-        func = function() 
+        func = function()
             securecall(ToggleFriendsFrame, 4)
         end,
         notCheckable = true,
@@ -382,7 +382,7 @@ local menuList = {
     {
         text = ENCOUNTER_JOURNAL,
         icon = 'Interface\\MINIMAP\\TRACKING\\Profession',
-        func = function() 
+        func = function()
             securecall(ToggleEncounterJournal)
         end,
         notCheckable = true,
@@ -390,16 +390,16 @@ local menuList = {
     {
         text = GM_EMAIL_NAME,
         icon = 'Interface\\CHATFRAME\\UI-ChatIcon-Blizz',
-        func = function() 
-            securecall(ToggleHelpFrame) 
+        func = function()
+            securecall(ToggleHelpFrame)
         end,
         notCheckable = true,
     },
     {
         text = BATTLEFIELD_MINIMAP,
         colorCode = '|cff999999',
-        func = function() 
-            securecall(ToggleBattlefieldMinimap) 
+        func = function()
+            securecall(ToggleBattlefieldMinimap)
         end,
         notCheckable = true,
     },
@@ -446,13 +446,13 @@ f:SetScript('OnMouseUp', function(self, button)
     GameTooltip:Hide()
 end)
 
-f:SetScript('OnEnter', function(self) 
+f:SetScript('OnEnter', function(self)
     GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 25, -5)
     GameTooltip:AddLine(MAINMENU_BUTTON)
     GameTooltip:Show()
 end)
 
-f:SetScript('OnLeave', function() 
+f:SetScript('OnLeave', function()
     GameTooltip:Hide()
 end)
 end
@@ -487,7 +487,7 @@ Minimap:SetScript("OnLeave",function()
 	m_coord:SetAlpha(0)
 	m_coord_text:SetAlpha(0)
 end)
- 
+
 local ela = 0
 local coord_Update = function(self,t)
 	ela = ela - t

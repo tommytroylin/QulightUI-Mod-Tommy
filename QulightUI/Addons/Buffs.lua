@@ -2,7 +2,7 @@ if not Qulight["buffdebuff"].enable or not Qulight["unitframes"].enable == true 
 local addon, ns = ...
 
 AnchorBuff = CreateFrame("Frame","Move_Buff",UIParent)
-AnchorBuff:SetPoint("TOPRIGHT", UIParent, -170, -25)
+AnchorBuff:SetPoint("TOPRIGHT", UIParent, -190, -25)
 CreateAnchor(AnchorBuff, "Move Buff", 300, 70)
 
 local mainhand, _, _, offhand, _, _, hand3 = GetWeaponEnchantInfo()
