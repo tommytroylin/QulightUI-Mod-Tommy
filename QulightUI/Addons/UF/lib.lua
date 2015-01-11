@@ -1,7 +1,7 @@
 local addon, ns = ...
 local cast = ns.cast
 local _, playerClass = UnitClass("player")
-local cast = CreateFrame("Frame")  
+local cast = CreateFrame("Frame")
 local oUF = ns.oUF or oUF
 oUF.colors.runes = {{0.87, 0.12, 0.23};{0.40, 0.95, 0.20};{0.14, 0.50, 1};{.70, .21, 0.94};}
 --------------------------------------------------------------------------------------
@@ -49,13 +49,13 @@ gen_fontstring = function(f, name, size, outline)
     fs:SetFont(name, size, "OUTLINE")
     return fs
 end
-PortraitUpdate = function(self, unit) 
+PortraitUpdate = function(self, unit)
 
 	self:SetAlpha(0) self:SetAlpha(0.3)
 	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
 		self:SetCamera(1)
-	end	
-end	
+	end
+end
 HidePortrait = function(self, unit)
 	if self.unit == "target" then
 		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then
@@ -164,11 +164,11 @@ cast.PostCastStart = function(self, unit, name, rank, text)
 		self:SetStatusBarColor(interruptcb[1],interruptcb[2],interruptcb[3],1)
 	else
 		self:SetStatusBarColor(pcolor[1], pcolor[2], pcolor[3],1)
-	end	
+	end
 end
 cast.PostCastStop = function(self, unit, name, rank, castid)
 	if not unit == "party" then
-	if not self.fadeOut then 
+	if not self.fadeOut then
 		self:SetStatusBarColor(unpack(self.CompleteColor))
 		self.fadeOut = true
 	end
@@ -268,10 +268,10 @@ do
 			end
 		end
 	end
-			
+
 	ComboDisplay = function(self, event, unit)
 		if(unit == 'pet') then return end
-		
+
 		local cpoints = self.CPoints
 		local cp
 		if (UnitHasVehicleUI("player") or UnitHasVehicleUI("vehicle")) then
@@ -287,22 +287,22 @@ do
 				cpoints[i]:SetAlpha(0.15)
 			end
 		end
-		
+
 		if cpoints[1]:GetAlpha() == 1 then
 			for i=1, MAX_COMBO_POINTS do
 				cpoints[i]:Show()
 			end
-			
+
 		else
 			for i=1, MAX_COMBO_POINTS do
 				cpoints[i]:Hide()
 			end
-			
+
 		end
 	end
 end
 function AltPowerBarOnToggle(self)
-	local unit = self:GetParent().unit or self:GetParent():GetParent().unit					
+	local unit = self:GetParent().unit or self:GetParent():GetParent().unit
 end
 function AltPowerBarPostUpdate(self, min, cur, max)
 	local perc = math.floor((cur/max)*100)
@@ -312,11 +312,11 @@ function AltPowerBarPostUpdate(self, min, cur, max)
 		self:SetStatusBarColor(1, 1, 0)
 	else
 		self:SetStatusBarColor(1, 0, 0)
-	end	
-	local unit = self:GetParent().unit or self:GetParent():GetParent().unit	
+	end
+	local unit = self:GetParent().unit or self:GetParent():GetParent().unit
 	local type = select(10, UnitAlternatePowerInfo(unit))
-end	
-gen_hpbar = function(f) 
+end
+gen_hpbar = function(f)
     local s = CreateFrame("StatusBar", nil, f)
     s:SetStatusBarTexture(Qulight["media"].texture)
 	s:GetStatusBarTexture():SetHorizTile(true)
@@ -354,22 +354,22 @@ gen_hpstrings = function(f)
     local hpval = gen_fontstring(f.Health, Qulight["media"].font, 9, retVal(f,17,12,10,12), "OUTLINE")
     hpval:SetPoint("RIGHT", f.Health, "TOPRIGHT", retVal(f,0,-3,-1,-3), retVal(f,-7,-11,-15,-9))
     hpval.frequentUpdates = 0.1
-	
+
 	if f.mystyle == "player" then
 		f:Tag(name, "[color][namelong][afk]")
 	elseif f.mystyle == "target" then
 		f:Tag(name, "[color][namelong][afk]")
-	elseif f.mystyle == "focus" then	
+	elseif f.mystyle == "focus" then
 		f:Tag(name, "[color][namelong][afk]")
 	else
 		f:Tag(name, "[color][nameshort]")
 	end
 	f:Tag(hpval, retVal(f,"[hp][color]","","[hp][color]","[hp][color]"))
-	
+
 	local per = f.Health:CreateFontString(nil, "OVERLAY")
 	per:SetPoint("RIGHT", 0, retVal(f, 4, 4, -3, -3))
 	per:SetFont(Qulight["media"].font, 9, "OUTLINE")
-	f:Tag(per, retVal(f,'[color][power] | [perpp]%','[hp]','','' ))		
+	f:Tag(per, retVal(f,'[color][power] | [perpp]%','[hp]','','' ))
 end
 gen_ppbar = function(f)
     local s = CreateFrame("StatusBar", nil, f)
@@ -380,7 +380,7 @@ gen_ppbar = function(f)
 	s:SetHeight(retVal(f,4,4,4,4))
 	s:SetFrameLevel(4)
     s:SetPoint("BOTTOM",UIParent,"BOTTOM",0,1)
-	
+
 	if f.mystyle == "player" then
 		s:SetPoint("BOTTOM",f,"BOTTOM", 0, 0)
 		s:SetWidth(212)
@@ -417,13 +417,13 @@ gen_ppbar = function(f)
 		s:SetPoint("BOTTOM",f,"BOTTOM",0,4)
 		s:SetWidth(92)
 	end
-	
+
 	local h = CreateFrame("Frame", nil, s)
 	h:SetPoint("TOPLEFT",-5,5)
 	h:SetPoint("BOTTOMRIGHT",5,-5)
 	h:SetFrameLevel(3)
 	CreateStyle(h, -1, 4, .9, 0.6)
-    
+
 	local b = s:CreateTexture(nil, "BACKGROUND")
     b:SetTexture(Qulight["media"].texture)
     b:SetAllPoints(s)
@@ -456,19 +456,19 @@ gen_focusbar = function(f)
 end
 gen_portrait = function(f)
 	local portrait = CreateFrame("PlayerModel", nil, f)
-	portrait.PostUpdate = function(f) f:SetAlpha(0) f:SetAlpha(1) end 
+	portrait.PostUpdate = function(f) f:SetAlpha(0) f:SetAlpha(1) end
 	portrait:SetAllPoints(f.Health)
 	table.insert(f.__elements, HidePortrait)
 	portrait.PostUpdate = PortraitUpdate
 	f.Portrait = portrait
-	
+
 	local overlay = CreateFrame("Frame", nil, f)
 	overlay:SetFrameLevel(2)
-	
+
 	bg = f.Health:CreateTexture(nil, 'BORDER')
 	bg:SetAllPoints()
 	bg:SetTexture(Qulight["media"].texture)
-	bg:SetVertexColor(.4,.4,.4,1)			
+	bg:SetVertexColor(.4,.4,.4,1)
 	bg:ClearAllPoints()
 	bg:SetPoint('BOTTOMLEFT', f.Health:GetStatusBarTexture(), 'BOTTOMRIGHT')
 	bg:SetPoint('TOPRIGHT', f.Health)
@@ -486,7 +486,7 @@ gen_InfoIcons = function(f)
       f.Combat:SetTexture('Interface\\CharacterFrame\\UI-StateIcon')
       f.Combat:SetTexCoord(0.58, 0.90, 0.08, 0.41)
     end
-  
+
     li = h:CreateTexture(nil, "OVERLAY")
     li:SetPoint("TOPLEFT", f, 0, 8)
     li:SetSize(10,10)
@@ -586,7 +586,7 @@ gen_castbar = function(f)
         s:SetWidth(135)
 	    s:SetPoint("TOPRIGHT",f,"BOTTOMRIGHT",0,-6)
 	end
-	
+
     s:SetStatusBarTexture(Qulight["media"].texture)
     s:SetStatusBarColor(.15,.15,.15,1)
 	s.colorClass = true
@@ -612,7 +612,7 @@ gen_castbar = function(f)
     txt:SetPoint("RIGHT", t, "LEFT", -5, 0)
     local i = s:CreateTexture(nil, "ARTWORK")
 	i:SetSize(s:GetHeight(),s:GetHeight())
-	
+
 	if f.mystyle == "player" then
 	i:SetPoint("RIGHT", s, "LEFT", -5, 0)
 	elseif f.mystyle == "target" then
@@ -620,7 +620,7 @@ gen_castbar = function(f)
 	else
 	i:SetPoint("RIGHT", s, "LEFT", -5, 0)
 	end
-	    
+
     i:SetTexCoord(0.1, 0.9, 0.1, 0.9)
     local h2 = CreateFrame("Frame", nil, s)
     h2:SetFrameLevel(0)
@@ -649,7 +649,7 @@ gen_castbar = function(f)
     s.PostChannelStop = cast.PostChannelStop
     s.PostCastFailed = cast.PostCastFailed
     s.PostCastInterrupted = cast.PostCastFailed
-	
+
     f.Castbar = s
     f.Castbar.Text = txt
     f.Castbar.Time = t
@@ -683,7 +683,7 @@ gen_bigcastbar = function(f)
         s:SetWidth(135)
 	    s:SetPoint("TOPRIGHT",f,"BOTTOMRIGHT",0,-6)
 	end
-	
+
     s:SetStatusBarTexture(Qulight["media"].texture)
     s:SetStatusBarColor(.15,.15,.15,1)
     s:SetFrameLevel(1)
@@ -711,7 +711,7 @@ gen_bigcastbar = function(f)
 	if f.mystyle == "target" then
 		i:SetSize(s:GetHeight(),s:GetHeight())
 	end
-	
+
     i:SetPoint("RIGHT", s, "LEFT", -5, 0)
     i:SetTexCoord(0.1, 0.9, 0.1, 0.9)
     local h2 = CreateFrame("Frame", nil, s)
@@ -741,7 +741,7 @@ gen_bigcastbar = function(f)
     s.PostChannelStop = cast.PostChannelStop
     s.PostCastFailed = cast.PostCastFailed
     s.PostCastInterrupted = cast.PostCastFailed
-	
+
     f.Castbar = s
     f.Castbar.Text = txt
     f.Castbar.Time = t
@@ -791,17 +791,17 @@ local postCreateIcon = function(element, button)
 	local diffPos = 0
 	local self = element:GetParent()
 	if self.mystyle == "target" then diffPos = 1 end
-	
+
 	element.disableCooldown = true
 	button.cd.noOCC = true
 	button.cd.noCooldownCount = true
-	
+
 	local h = CreateFrame("Frame", nil, button)
 	h:SetFrameLevel(0)
 	h:SetPoint("TOPLEFT",-5,5)
 	h:SetPoint("BOTTOMRIGHT",5,-5)
 	CreateStyle(h, -1)
-	
+
 	if self.mystyle == "player" then
 		local time = gen_fontstring(button, Qulight["media"].pxfont, 10, "OUTLINE")
 		time:SetPoint("BOTTOM", button, "BOTTOM", 2, -4)
@@ -815,22 +815,22 @@ local postCreateIcon = function(element, button)
 		time:SetVertexColor(1,1,1)
 		button.time = time
 	end
-		
+
 	local count = gen_fontstring(button, Qulight["media"].pxfont, 10, "OUTLINE")
 	count:SetPoint("CENTER", button, "TOPRIGHT", 0, 0)
 	count:SetJustifyH("RIGHT")
 	button.count = count
-		
+
 	button.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 	button.icon:SetDrawLayer("ARTWORK")
 end
 local postUpdateIcon = function(element, unit, button, index)
 	local _, _, _, _, _, duration, expirationTime, unitCaster, _ = UnitAura(unit, index, button.filter)
-	
+
 	if duration and duration > 0 then
 		button.time:Show()
-		button.timeLeft = expirationTime	
-		button:SetScript("OnUpdate", setTimer)			
+		button.timeLeft = expirationTime
+		button:SetScript("OnUpdate", setTimer)
 	else
 		button.time:Hide()
 		button.timeLeft = math.huge
@@ -838,13 +838,13 @@ local postUpdateIcon = function(element, unit, button, index)
 	end
 
 	if(button.debuff) then
-		if(unit == "target") then	
+		if(unit == "target") then
 			if (unitCaster == "player" or unitCaster == "vehicle") then
-				button.icon:SetDesaturated(false)                 
+				button.icon:SetDesaturated(false)
 			elseif(not UnitPlayerControlled(unit)) then -- If Unit is Player Controlled don"t desaturate debuffs
 				button:SetBackdropColor(0, 0, 0)
-				button.overlay:SetVertexColor(0.3, 0.3, 0.3)      
-				button.icon:SetDesaturated(true)  
+				button.overlay:SetVertexColor(0.3, 0.3, 0.3)
+				button.icon:SetDesaturated(true)
 			end
 		end
 	end
@@ -856,7 +856,7 @@ local postUpdateIcon = function(element, unit, button, index)
 end
 createAuras = function(f)
 	Auras = CreateFrame("Frame", nil, f)
-	Auras.size = 18		
+	Auras.size = 18
 	Auras:SetHeight(42)
 	Auras:SetWidth(f:GetWidth())
 	Auras.spacing = 7
@@ -864,7 +864,7 @@ createAuras = function(f)
 		Auras:SetPoint("BOTTOM", f, "BOTTOM", 0, -26)
 		Auras.numBuffs = 10
 		Auras.numDebuffs = 10
-		Auras.size = 18	
+		Auras.size = 18
 		--Auras.onlyShowPlayer = true
 		Auras.spacing = 4.4
 	end
@@ -873,7 +873,7 @@ createAuras = function(f)
 		Auras.numBuffs = 0
 		Auras.numDebuffs = 5
 		Auras.spacing = 10
-		Auras.size = 12			
+		Auras.size = 12
 	end
 	if f.mystyle == "focus" then
 		Auras:SetPoint("TOPLEFT", f, "BOTTOMLEFT", 0, 20)
@@ -883,7 +883,7 @@ createAuras = function(f)
 	end
 	Auras.gap = true
 	Auras.initialAnchor = "BOTTOMLEFT"
-	Auras["growth-x"] = "RIGHT"		
+	Auras["growth-x"] = "RIGHT"
 	Auras["growth-y"] = "DOWN"
 	Auras.PostCreateIcon = postCreateIcon
 	Auras.PostUpdateIcon = postUpdateIcon
@@ -924,7 +924,7 @@ createBuffs = function(f)
 		b.initialAnchor = "TOPRIGHT"
 		b["growth-x"] = "LEFT"
 		b["growth-y"] = "DOWN"
-		b.num = 4		
+		b.num = 4
 	else
 		b.num = 0
     end
@@ -968,7 +968,7 @@ createDebuffs = function(f)
 		b.onlyShowPlayer = true
 		b["growth-x"] = "RIGHT"
 		b["growth-y"] = "DOWN"
-		b.num = 4	
+		b.num = 4
 	else
 		b.num = 0
 	end
@@ -979,34 +979,34 @@ createDebuffs = function(f)
 end
 addEclipseBar = function(self)
 	if playerClass ~= "DRUID" then return end
-	
+
 	local eclipseBar = CreateFrame('Frame', nil, self)
 	eclipseBar:SetPoint("TOPLEFT", self, "TOPLEFT", 3,-3)
 	eclipseBar:SetSize((self:GetWidth()-120), 6)
 	eclipseBar:SetFrameLevel(6)
-	
+
 	local h = CreateFrame("Frame", nil, eclipseBar)
 	h:SetFrameLevel(0)
 	h:SetPoint("TOPLEFT",-5,5)
 	h:SetPoint("BOTTOMRIGHT",5,-5)
 	CreateStyle(h, -1)
-	
+
 	local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 	lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
 	lunarBar:SetSize((self:GetWidth()-120), 6)
 	lunarBar:SetStatusBarTexture(Qulight["media"].texture)
 	lunarBar:SetStatusBarColor(0, 0, 1)
 	eclipseBar.LunarBar = lunarBar
-	
+
 	local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
 	solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
 	solarBar:SetSize((self:GetWidth()-120), 6)
 	solarBar:SetStatusBarTexture(Qulight["media"].texture)
 	solarBar:SetStatusBarColor(1, 3/5, 0)
 	eclipseBar.SolarBar = solarBar
-	
+
 	local eclipseBarText = solarBar:CreateFontString(nil, 'OVERLAY')
-	eclipseBarText:SetPoint("CENTER", eclipseBar, "CENTER", 0, 0)	
+	eclipseBarText:SetPoint("CENTER", eclipseBar, "CENTER", 0, 0)
 	eclipseBarText:SetFont(Qulight["media"].font, 9, "OUTLINE")
 	self:Tag(eclipseBarText, '[pereclipse]%')
 	self.EclipseBar = eclipseBar
@@ -1019,31 +1019,31 @@ genHolyPower = function(self)
 	bars:SetHeight(6)
 	bars:SetFrameLevel(6)
 
-	for i = 1, 5 do					
+	for i = 1, 5 do
 		bars[i]=CreateFrame("StatusBar", nil, bars)
-		bars[i]:SetHeight(bars:GetHeight())					
+		bars[i]:SetHeight(bars:GetHeight())
 		bars[i]:SetStatusBarTexture(Qulight["media"].texture)
 		bars[i]:GetStatusBarTexture():SetHorizTile(false)
 
 		bars[i].bg = bars[i]:CreateTexture(nil, 'BORDER')
 		bars[i]:SetStatusBarColor(228/255,225/255,16/255)
 		bars[i].bg:SetTexture(228/255,225/255,16/255)
-					
+
 		if i == 1 then
 			bars[i]:SetPoint("LEFT", bars)
 		else
 			bars[i]:SetPoint("LEFT", bars[i-1], "RIGHT", 1, 0)
 		end
-		
+
 		bars[i].bg:SetAllPoints(bars[i])
 		bars[i]:SetWidth((bars:GetWidth() - 2)/5)
-		bars[i].bg:SetTexture(Qulight["media"].texture)					
+		bars[i].bg:SetTexture(Qulight["media"].texture)
 		bars[i].bg:SetAlpha(.15)
 	end
-				
+
 	CreateStyle(bars, 4, 5, .9, 0.6)
 	bars.Override = UpdateHoly
-	self.HolyPower = bars	
+	self.HolyPower = bars
 end
 genRunes = function(self)
 	if playerClass ~= "DEATHKNIGHT" then return end
@@ -1066,9 +1066,9 @@ genRunes = function(self)
 		runes[i]:SetStatusBarTexture(Qulight["media"].texture)
 		runes[i]:GetStatusBarTexture():SetHorizTile(false)
 	end
-				
+
 	runes.backdrop = CreateFrame("Frame", nil, runes)
-	
+
 	CreateStyle(runes.backdrop, 2, 5, .9, 0.6)
 	runes.backdrop:SetBackdropBorderColor(.2,.2,.2,1)
 	runes.backdrop:SetPoint("TOPLEFT", -2, 2)
@@ -1087,7 +1087,7 @@ if Qulight["unitframes"].TotemBars then
 	totems:SetFrameLevel(6)
 	totems.Destroy = true
 	totems.colors = {{233/255, 46/255, 16/255};{173/255, 217/255, 25/255};{35/255, 127/255, 255/255};{178/255, 53/255, 240/255};}
-			
+
 	for i = 1, 4 do
 		totems[i] = CreateFrame("StatusBar", nil, totems)
 		totems[i]:SetHeight(totems:GetHeight())
@@ -1108,33 +1108,33 @@ if Qulight["unitframes"].TotemBars then
 		totems[i].bg.multiplier = 0.3
 	end
 	totems.backdrop = CreateFrame("Frame", nil, totems)
-	
+
 	CreateStyle(totems.backdrop, 2, 5, .9, 0.6)
 	totems.backdrop:SetBackdropBorderColor(.2,.2,.2,1)
 	totems.backdrop:SetPoint("TOPLEFT", -2, 2)
 	totems.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
 	totems.backdrop:SetFrameLevel(5)
-	self.TotemBar = totems			
+	self.TotemBar = totems
 	end
 end
 
 Magebars = function(self)
-	if myclass == "MAGE" then	
+	if myclass == "MAGE" then
 		local mb = CreateFrame("Frame", "ArcaneBar", self)
 		mb:SetPoint("TOPLEFT", self, "TOPLEFT",2,-2)
 		mb:SetWidth(103)
 		mb:SetHeight(6)
 		mb:SetBackdrop(backdrop)
 		mb:SetBackdropColor(0, 0, 0)
-		mb:SetBackdropBorderColor(0, 0, 0)				
+		mb:SetBackdropBorderColor(0, 0, 0)
 		CreateStyle(mb, 4, 1, .9, 0.6)
 		mb:SetFrameLevel(6)
-				
+
 		for i = 1, 4 do
 		mb[i] = CreateFrame("StatusBar", "ArcaneBar"..i, mb)
 		mb[i]:SetHeight(6)
 		mb[i]:SetStatusBarTexture(Qulight["media"].texture)
-						
+
 			if i == 1 then
 				mb[i]:SetWidth(100 / 4)
 				mb[i]:SetPoint("LEFT", mb, "LEFT", 0, 0)
@@ -1144,24 +1144,24 @@ Magebars = function(self)
 			end
 				mb[i].bg = mb[i]:CreateTexture(nil, 'ARTWORK')
 		end
-				
+
 		self.ArcaneChargeBar = mb
-				
+
 		local rp = CreateFrame("Frame", "RunePower", self)
 		rp:SetPoint("TOPLEFT", self, "TOPLEFT", 108,-2)
 		rp:SetWidth(41)
 		rp:SetHeight(6)
-				
+
 		rp:SetBackdrop(backdrop)
 		rp:SetBackdropColor(0, 0, 0)
-		rp:SetBackdropBorderColor(0, 0, 0)	
+		rp:SetBackdropBorderColor(0, 0, 0)
 		CreateStyle(rp, 4, 1, .9, 0.6)
 		rp:SetFrameLevel(6)
 		for i = 1, 2 do
 			rp[i] = CreateFrame("StatusBar", "RunePower"..i, rp)
 			rp[i]:SetHeight(6)
 			rp[i]:SetStatusBarTexture(Qulight["media"].texture)
-					
+
 			if i == 1 then
 				rp[i]:SetWidth(40 / 2)
 				rp[i]:SetPoint("LEFT", rp, "LEFT", 0, 0)
@@ -1169,10 +1169,10 @@ Magebars = function(self)
 				rp[i]:SetWidth(40 / 2)
 				rp[i]:SetPoint("LEFT", rp[i-1], "RIGHT", 1, 0)
 			end
-				rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')		
-		end			
+				rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
+		end
 		self.RunePower = rp
-	end			
+	end
 end
 
 genCPoints = function(self)
@@ -1183,13 +1183,13 @@ genCPoints = function(self)
 	bars:SetFrameLevel(6)
 	bars:SetBackdropBorderColor(0,0,0,0)
 	bars:SetBackdropColor(0,0,0,0)
-		
-	for i = 1, 5 do					
+
+	for i = 1, 5 do
 		bars[i] = CreateFrame("StatusBar", self:GetName().."_Combo"..i, bars)
-		bars[i]:SetHeight(6)					
+		bars[i]:SetHeight(6)
 		bars[i]:SetStatusBarTexture(Qulight["media"].texture)
 		bars[i]:GetStatusBarTexture():SetHorizTile(false)
-							
+
 		if i == 1 then
 			bars[i]:SetPoint("LEFT", bars)
 		else
@@ -1198,18 +1198,18 @@ genCPoints = function(self)
 		bars[i]:SetAlpha(0.15)
 		bars[i]:SetWidth(((self:GetWidth()-100) - 4)/5)
 	end
-		
-	bars[1]:SetStatusBarColor(0.69, 0.31, 0.31)		
+
+	bars[1]:SetStatusBarColor(0.69, 0.31, 0.31)
 	bars[2]:SetStatusBarColor(0.69, 0.31, 0.31)
 	bars[3]:SetStatusBarColor(0.65, 0.63, 0.35)
 	bars[4]:SetStatusBarColor(0.65, 0.63, 0.35)
 	bars[5]:SetStatusBarColor(0.33, 0.59, 0.33)
-		
+
 	self.CPoints = bars
 	self.CPoints.Override = ComboDisplay
-		
+
 	bars.FrameBackdrop = CreateFrame("Frame", nil, bars[1])
-	
+
 	CreateStyle(bars.FrameBackdrop, 2, 5, .9, 0.6)
 	bars.FrameBackdrop:SetBackdropBorderColor(.2,.2,.2,1)
 	bars.FrameBackdrop:SetPoint("TOPLEFT", bars, "TOPLEFT", -2, 2)
@@ -1218,7 +1218,7 @@ genCPoints = function(self)
 end
 genHarmony = function(self)
 	if myclass == "MONK" then
-				
+
 		local hb = CreateFrame("Frame", "Harmony", self)
 		hb:SetPoint("TOPLEFT", self, "TOPLEFT",2,-2)
 		hb:SetWidth(120)
@@ -1233,7 +1233,7 @@ genHarmony = function(self)
 				hb[i] = CreateFrame("StatusBar", nil, hb)
 				hb[i]:SetHeight(6)
 				hb[i]:SetStatusBarTexture(Qulight["media"].texture)
-									
+
 					if i == 1 then
 						hb[i]:SetWidth(120 / 6)
 						hb[i]:SetPoint("LEFT", hb, "LEFT", 0, 0)
@@ -1253,16 +1253,16 @@ genShards = function(self)
 		wb:SetWidth(120)
 		wb:SetHeight(5)
 		wb:SetBackdrop(backdrop)
-					
+
 		wb:SetBackdropColor(0, 0, 0)
-		wb:SetBackdropBorderColor(0, 0, 0)	
+		wb:SetBackdropBorderColor(0, 0, 0)
 		CreateStyle(wb, 4, 1, .9, 0.6)
 		wb:SetFrameLevel(6)
 			for i = 1, 4 do
 				wb[i] = CreateFrame("StatusBar", "WarlockSpecBars"..i, wb)
 				wb[i]:SetHeight(5)
 				wb[i]:SetStatusBarTexture(Qulight["media"].texture)
-						
+
 					if i == 1 then
 						wb[i]:SetWidth((123 / 4))
 						wb[i]:SetPoint("LEFT", wb, "LEFT", 0, 0)
@@ -1272,26 +1272,26 @@ genShards = function(self)
 					end
 						wb[i].bg = wb[i]:CreateTexture(nil, 'ARTWORK')
 			end
-		wb:SetScript("OnShow", function(self) 
-		local f = self:GetParent()			
+		wb:SetScript("OnShow", function(self)
+		local f = self:GetParent()
 		end)
-					
+
 		wb:SetScript("OnHide", function(self)
 		local f = self:GetParent()
 		end)
-					
-		self.WarlockSpecBars = wb				
+
+		self.WarlockSpecBars = wb
 	end
 end
 genShadowOrbsBar = function(self)
 	if myclass == "PRIEST" then
-				
+
 		self.ShadowOrbsBar = CreateFrame("Frame", self:GetName().."_ShadowOrbsBar", self)
 		CreateStyle(self.ShadowOrbsBar, 4, 1, .9, 0.6)
 		self.ShadowOrbsBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 4, -9)
 		self.ShadowOrbsBar:SetSize(122, 6)
 		self.ShadowOrbsBar:SetFrameLevel(6)
-			
+
 			for i = 1, 5 do
 				self.ShadowOrbsBar[i] = CreateFrame("StatusBar", nil, self.ShadowOrbsBar)
 				self.ShadowOrbsBar[i]:SetSize(120 / 5, 6)
@@ -1315,7 +1315,7 @@ genShadowOrbsBar = function(self)
 end
 AltPowerBar = function(self)
 	local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
-	
+
 	AltPowerBar:SetHeight(5)
 	AltPowerBar:SetStatusBarTexture(Qulight["media"].texture)
 	AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
@@ -1327,29 +1327,29 @@ AltPowerBar = function(self)
 	AltPowerBar:SetPoint("RIGHT", DataLeftPanel, -1, 1)
 	AltPowerBar:SetPoint("TOP", DataLeftPanel, 1, -1)
 	AltPowerBar:SetPoint("BOTTOM", DataLeftPanel, -1, 1)
-		
+
 	AltPowerBar:SetBackdrop({
-			bgFile = Qulight["media"].texture, 
-			edgeFile = Qulight["media"].texture, 
-			tile = false, tileSize = 0, edgeSize = 1, 
+			bgFile = Qulight["media"].texture,
+			edgeFile = Qulight["media"].texture,
+			tile = false, tileSize = 0, edgeSize = 1,
 			insets = { left = 0, right = 0, top = 0, bottom = 0}
 		})
-		
+
 	AltPowerBar:SetBackdropColor(.05,.05,.05, 1)
-	AltPowerBar:SetBackdropBorderColor(0, 0, 0, 0)	
-		
+	AltPowerBar:SetBackdropBorderColor(0, 0, 0, 0)
+
 	AltPowerBar.text = SetFontString(AltPowerBar, Qulight["media"].font, 10, "OUTLINE")
 	AltPowerBar.text:SetPoint("CENTER")
 	self:Tag(AltPowerBar.text, '[altpower]')
-		
+
 	AltPowerBar:HookScript("OnShow", AltPowerBarOnToggle)
 	AltPowerBar:HookScript("OnHide", AltPowerBarOnToggle)
 
-	self.AltPowerBar = AltPowerBar		
+	self.AltPowerBar = AltPowerBar
 	self.AltPowerBar.PostUpdate = AltPowerBarPostUpdate
 end
 Experience = function(self)
-	if Qulight["unitframes"].Experiencebar then 
+	if Qulight["unitframes"].Experiencebar then
 	local Experience = CreateFrame('StatusBar', nil, self)
 	Experience:SetStatusBarTexture(Qulight["media"].texture)
 	Experience:SetStatusBarColor(0, 0.7, 1)
@@ -1359,42 +1359,42 @@ Experience = function(self)
 	Experience:SetFrameLevel(2)
 	Experience.Tooltip = true
 	Experience:SetOrientation("VERTICAL")
-	
+
 	local h = CreateFrame("Frame", nil, Experience)
 	h:SetFrameLevel(1)
 	h:SetPoint("TOPLEFT",-5,5)
 	h:SetPoint("BOTTOMRIGHT",5,-5)
 	CreateStyle(h, -1 )
-				
+
 	local Rested = CreateFrame('StatusBar', nil, Experience)
 	Rested:SetStatusBarTexture(Qulight["media"].texture)
 	Rested:SetStatusBarColor(0, 0.4, 1, 0.6)
 	Rested:SetFrameLevel(2)
 	Rested:SetOrientation("VERTICAL")
 	Rested:SetAllPoints(Experience)
-				
+
 	self.Experience = Experience
 	self.Experience.Rested = Rested
 	self.Experience.PostUpdate = ExperiencePostUpdate
 	end
 end
 Reputation = function(self)
-	if Qulight["unitframes"].Reputationbar then 
+	if Qulight["unitframes"].Reputationbar then
 	local Reputation = CreateFrame('StatusBar', nil, self)
 	Reputation:SetStatusBarTexture(Qulight["media"].texture)
 	Reputation:SetWidth(6)
 	Reputation:SetHeight(168)
-	
+
 	Reputation:SetPoint('RIGHT', ChatBackground, 'RIGHT', 8, 0)
 	Reputation:SetFrameLevel(2)
 	Reputation:SetOrientation("VERTICAL")
-	
+
 	local h = CreateFrame("Frame", nil, Reputation)
 	h:SetFrameLevel(1)
 	h:SetPoint("TOPLEFT",-5,5)
 	h:SetPoint("BOTTOMRIGHT",5,-5)
 	CreateStyle(h, -1)
-	
+
 	Reputation.PostUpdate = UpdateReputationColor
 	Reputation.Tooltip = true
 	self.Reputation = Reputation
@@ -1438,7 +1438,7 @@ local function CreatePlayerStyle(self, unit, isSingle)
 	gen_InfoIcons(self)
 	TotemBars(self)
 	Magebars(self)
-	
+
 	Experience(self)
 	Reputation(self)
 	AltPowerBar(self)
@@ -1460,7 +1460,7 @@ local function CreateTargetStyle(self, unit, isSingle)
 	gen_highlight(self)
 	gen_ppbar(self)
 	gen_RaidMark(self)
-	
+
 	self.Health.frequentUpdates = false
 	if Qulight["unitframes"].HealthcolorClass then
 	self.Health.colorClass = true
@@ -1479,11 +1479,11 @@ local function CreateTargetStyle(self, unit, isSingle)
 	else
 	gen_bigcastbar(self)
 	end
-	
+
 	addQuestIcon(self)
 	createAuras(self)
 	genCPoints(self)
-	if Qulight["unitframes"].showPortrait then gen_portrait(self) end	
+	if Qulight["unitframes"].showPortrait then gen_portrait(self) end
 end
 local function CreateFocusStyle(self, unit, isSingle)
 	self.mystyle = "focus"
@@ -1494,7 +1494,7 @@ local function CreateFocusStyle(self, unit, isSingle)
 	gen_hpstrings(self)
 	gen_highlight(self)
 	gen_ppbar(self)
-	
+
 	self.Power.colorTapping = true
 	self.Power.colorDisconnected = true
 	if Qulight["unitframes"].Powercolor then
@@ -1529,13 +1529,13 @@ local function CreateToTStyle(self, unit, isSingle)
 	self.Power.colorClass = true
 	self.Power.colorHealth = true
 	self.Power.bg.multiplier = 0.5
-	
+
 	self.Health.frequentUpdates = false
 	if Qulight["unitframes"].HealthcolorClass then
 	self.Health.colorClass = true
 	end
 	if Qulight["unitframes"].showPortrait then gen_portrait(self) end
-end	
+end
 local function CreateFocusTargetStyle(self, unit, isSingle)
 	self.mystyle = "focustarget"
 	init(self)
@@ -1550,7 +1550,7 @@ local function CreateFocusTargetStyle(self, unit, isSingle)
 	self.Power.bg.multiplier = 0.5
 	gen_highlight(self)
 	gen_RaidMark(self)
-	
+
 	self.Health.frequentUpdates = false
 	if Qulight["unitframes"].HealthcolorClass then
 	self.Health.colorClass = true
@@ -1572,7 +1572,7 @@ local function CreatePetStyle(self, unit, isSingle)
 	self.Power.bg.multiplier = 0.5
 	gen_highlight(self)
 	gen_RaidMark(self)
-	
+
 	self.Health.frequentUpdates = false
 	if PlayerClass == "HUNTER" then
 		self.Power.colorReaction = false
@@ -1595,7 +1595,7 @@ local function CreateBossStyle(self, unit, isSingle)
 	self.Power.colorHealth = true
 	self.Power.bg.multiplier = 0.5
 	gen_castbar(self)
-	
+
 	AltPowerBar(self)
 	createBuffs(self)
 	createDebuffs(self)
@@ -1666,17 +1666,17 @@ oUF:Factory(function(self)
 		local pet = self:Spawn("pet", "oUF_pet")
 		pet:SetPoint("BOTTOM", Anchorpet)
 	end
-	if Qulight["unitframes"].showfocus then 
+	if Qulight["unitframes"].showfocus then
 		self:SetActiveStyle("Focus")
 		local focus = self:Spawn("focus", "oUF_focus")
 		focus:SetPoint("BOTTOM", Anchorfocus)
 	end
-	if Qulight["unitframes"].showfocustarget then 
+	if Qulight["unitframes"].showfocustarget then
 		self:SetActiveStyle("FocusTarget")
 		local focustarget = self:Spawn("focustarget", "oUF_focustarget")
 		focustarget:SetPoint("LEFT", oUF_focus, "RIGHT", 8, -3)
 	end
-	
+
 	if Qulight["unitframes"].MTFrames then
 		oUF:SetActiveStyle("oUF_MT")
 		local tank = oUF:SpawnHeader('oUF_MT', nil, 'raid',
@@ -1714,8 +1714,8 @@ oUF:Factory(function(self)
 			arena[i]:SetPoint("BOTTOMRIGHT", arena[i-1], "BOTTOMRIGHT", 0, 90)
 		end
 		arena[i]:SetSize(150, 28)
-	end	
-	
+	end
+
 	local QulightPrepArena = {}
 	for i = 1, 5 do
 		QulightPrepArena[i] = CreateFrame("Frame", "QulightPrepArena"..i, UIParent)
@@ -1741,27 +1741,27 @@ oUF:Factory(function(self)
 			for i=1, 5 do
 				local f = _G["QulightPrepArena"..i]
 				f:Hide()
-			end			
+			end
 		else
 			local numOpps = GetNumArenaOpponentSpecs()
-			
+
 			if numOpps > 0 then
 				for i=1, 5 do
 					local f = _G["QulightPrepArena"..i]
 					local s = GetArenaOpponentSpec(i)
 					local _, spec, class = nil, "UNKNOWN", "UNKNOWN"
-					
-					if s and s > 0 then 
+
+					if s and s > 0 then
 						_, spec, _, _, _, _, class = GetSpecializationInfoByID(s)
 					end
-					
+
 					if (i <= numOpps) then
 						if class and spec then
 							f.SpecClass:SetText(spec.."  -  "..LOCALIZED_CLASS_NAMES_MALE[class])
-							
+
 								local color = arena[i].colors.class[class]
 								f.Health:SetStatusBarColor(unpack(color))
-							
+
 							f:Show()
 						end
 					else
@@ -1772,11 +1772,11 @@ oUF:Factory(function(self)
 				for i=1, 5 do
 					local f = _G["QulightPrepArena"..i]
 					f:Hide()
-				end			
+				end
 			end
 		end
 	end)
-	
+
 	end
 end)
 
@@ -1790,18 +1790,18 @@ SlashCmdList.TEST_UF = function(msg)
 			_G[frames].Hide = nil
 		end
 
-		
+
 			for i = 1, 5 do
 				_G["oUF_Arena"..i].Hide = nil
 				_G["oUF_Arena"..i.."Target"].Hide = nil
 			end
-		
 
-		
+
+
 			for i = 1, MAX_BOSS_FRAMES do
 				_G["oUF_Boss"..i].Hide = nil
 			end
-		
+
 	else
 			for i = 1, 5 do
 				_G["oUF_Arena"..i].Hide = function() end
@@ -1814,18 +1814,18 @@ SlashCmdList.TEST_UF = function(msg)
 				_G["oUF_Arena"..i.."Target"].unit = "player"
 				_G["oUF_Arena"..i.."Target"]:Show()
 				_G["oUF_Arena"..i.."Target"]:UpdateAllElements()
-				
+
 					_G["oUF_Arena"..i].Talents:SetText(TALENTS)
-				
+
 			end
-		
+
 			for i = 1, MAX_BOSS_FRAMES do
 				_G["oUF_Boss"..i].Hide = function() end
 				_G["oUF_Boss"..i].unit = "player"
 				_G["oUF_Boss"..i]:Show()
 				_G["oUF_Boss"..i]:UpdateAllElements()
 			end
-		
+
 	end
 end
 SLASH_TEST_UF1 = "/testui"

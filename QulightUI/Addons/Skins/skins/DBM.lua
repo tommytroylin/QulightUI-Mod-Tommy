@@ -59,7 +59,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							tbar:SetBackdrop(backdrop)
 							tbar:SetBackdropColor(0.1, 0.1, 0.1, 0.15)
 						end
-						
+
 						if bar.enlarged then frame:SetWidth(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
 						if bar.enlarged then tbar:SetWidth(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
 
@@ -75,7 +75,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							spark:SetTexture(nil)
 							spark.killed = true
 						end
-			
+
 						if not icon1.styled then
 							icon1:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 							icon1:ClearAllPoints()
@@ -83,7 +83,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							icon1:SetPoint("BOTTOMRIGHT", icon1.overlay, -2, 2)
 							icon1.styled = true
 						end
-						
+
 						if not icon2.styled then
 							icon2:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 							icon2:ClearAllPoints()
@@ -91,12 +91,12 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							icon2:SetPoint("BOTTOMRIGHT", icon2.overlay, -2, 2)
 							icon2.styled = true
 						end
-						
+
 						if not texture.styled then
 							texture:SetTexture(Qulight["media"].texture)
 							texture.styled = true
 						end
-						
+
 						if not tbar.styled then
 							tbar:SetPoint("TOPLEFT", frame, "TOPLEFT", 2, -2)
 							tbar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
@@ -114,8 +114,8 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							name.SetFont = dummy
 							name.styled = true
 						end
-						
-						if not timer.styled then	
+
+						if not timer.styled then
 							timer:ClearAllPoints()
 							timer:SetPoint("RIGHT", frame, "RIGHT", -5, 0)
 							timer:SetFont(Qulight["media"].font, 10, "OUTLINE")
@@ -124,7 +124,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							timer.SetFont = dummy
 							timer.styled = true
 						end
-												
+
 						if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
 						if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
 						tbar:SetAlpha(1)
@@ -147,13 +147,13 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 					header[1]:SetFont(Qulight["media"].font, 10, "OUTLINE")
 					header[1]:SetShadowOffset(0, 0, 0, 0)
 					header[1]:SetTextColor(1, 1, 1, 1)
-					anchor.styled = true	
+					anchor.styled = true
 				end
 				header = nil
 			end
 			anchor = nil
 		end
-		
+
 		local SkinBoss = function()
 			local count = 1
 			while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
@@ -187,8 +187,8 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 					CreateStyle(bar, 2)
 					background:SetNormalTexture(nil)
 					bar.styled = true
-				end	
-				
+				end
+
 				if not progress.styled then
 					progress:SetStatusBarTexture(Qulight["media"].texture)
 					progress:SetBackdrop(backdrop)
@@ -218,7 +218,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 					name:SetJustifyH("LEFT")
 					name.styled = true
 				end
-				
+
 				if not timer.styled then
 					timer:ClearAllPoints()
 					timer:SetPoint("RIGHT", bar, "RIGHT", -5, 0)
@@ -230,12 +230,12 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 				count = count + 1
 			end
 		end
-		
+
 		hooksecurefunc(DBT, "CreateBar", SkinBars)
 		hooksecurefunc(DBM.BossHealth, "Show", SkinBossTitle)
 		hooksecurefunc(DBM.BossHealth, "AddBoss", SkinBoss)
 		hooksecurefunc(DBM.BossHealth, "UpdateSettings", SkinBoss)
-		
+
 		local firstRange = true
 		hooksecurefunc(DBM.RangeCheck, "Show", function()
 			if firstRange then
@@ -252,7 +252,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 				firstRange = false
 			end
 		end)
-	
+
 		if croprwicons then
 			local replace = string.gsub
 			local old = RaidNotice_AddMessage
@@ -265,61 +265,3 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 		end
 	end
 end)
-local UploadDBM = function()
-if IsAddOnLoaded("DBM-Core") then
-	DBM_SavedOptions.Enabled=true
-	DBM_SavedOptions.WarningIconLeft=false
-	DBM_SavedOptions.WarningIconRight=false
-	DBM_SavedOptions.ShowSpecialWarnings = true
-	DBM_SavedOptions.ShowMinimapButton = false
-	DBT_PersistentOptions["DBM"].Scale = 1
-	DBT_PersistentOptions["DBM"].HugeScale = 1
-	DBT_PersistentOptions["DBM"].BarXOffset = 0
-	DBT_PersistentOptions["DBM"].FillUpBars = true
-	DBT_PersistentOptions["DBM"].IconLeft = true
-	DBT_PersistentOptions["DBM"].ExpandUpwards = true
-	DBT_PersistentOptions["DBM"].IconRight = false
-	DBT_PersistentOptions["DBM"].IconLeft = true
-	DBT_PersistentOptions["DBM"].HugeBarsEnabled = true
-	DBT_PersistentOptions["DBM"].HugeBarXOffset = 0
-	DBT_PersistentOptions["DBM"].HugeBarXOffset = 0
-	DBT_PersistentOptions["DBM"].HugeTimerX = 7
-	DBT_PersistentOptions["DBM"].HugeBarYOffset = 7
-	DBT_PersistentOptions["DBM"].BarYOffset = 5
-	DBT_PersistentOptions["DBM"].Texture = Qulight["media"].texture
-
-	DBT_PersistentOptions["DBM"].EndColorG = 1
-	DBT_PersistentOptions["DBM"].HugeTimerY = 91.11986689654809
-	DBT_PersistentOptions["DBM"].HugeBarXOffset = 0
-	DBT_PersistentOptions["DBM"].Scale = 1
-	DBT_PersistentOptions["DBM"].IconLeft = true
-	DBT_PersistentOptions["DBM"].EnlargeBarsPercent = 0.125
-	DBT_PersistentOptions["DBM"].TimerY = 172.348816227143
-	DBT_PersistentOptions["DBM"].StartColorR = 0.08627450980392157
-	DBT_PersistentOptions["DBM"].HugeScale = 1
-	DBT_PersistentOptions["DBM"].TimerX = 432.5000026329087
-	DBT_PersistentOptions["DBM"].HugeBarsEnabled = true
-	DBT_PersistentOptions["DBM"].BarYOffset = 5
-	DBT_PersistentOptions["DBM"].HugeTimerX = -306.0003201890552
-	DBT_PersistentOptions["DBM"].HugeBarYOffset = 7
-	DBT_PersistentOptions["DBM"].ExpandUpwards = true
-	DBT_PersistentOptions["DBM"].TimerPoint = "CENTER"
-	DBT_PersistentOptions["DBM"].StartColorG = 1
-	DBT_PersistentOptions["DBM"].IconRight = false
-	DBT_PersistentOptions["DBM"].StartColorB = 0.1333333333333333
-	DBT_PersistentOptions["DBM"].EndColorR = 0.2196078431372549
-	DBT_PersistentOptions["DBM"].Width = 189
-	DBT_PersistentOptions["DBM"].HugeTimerPoint = "CENTER"
-	DBT_PersistentOptions["DBM"].FontSize = 10
-	DBT_PersistentOptions["DBM"].HugeWidth = 189
-	DBT_PersistentOptions["DBM"].EnlargeBarsTime = 8
-	DBT_PersistentOptions["DBM"].Height = 20
-	DBT_PersistentOptions["DBM"].FillUpBars = true
-	DBT_PersistentOptions["DBM"].BarXOffset = 0
-	DBT_PersistentOptions["DBM"].EndColorB = 0.3490196078431372
-end	
-end
-
-local loadOptions = CreateFrame("Frame")
-loadOptions:RegisterEvent("PLAYER_LOGIN")
-loadOptions:SetScript("OnEvent", UploadDBM)

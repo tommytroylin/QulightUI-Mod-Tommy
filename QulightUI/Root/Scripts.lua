@@ -11,16 +11,16 @@ SLASH_GETPARENT2 = "/parent"
 
 SlashCmdList["RELOADUI"] = function() ReloadUI() end
 SLASH_RELOADUI1 = "/rl"
-SLASH_RELOADUI2 = ".κδ"
+SLASH_RELOADUI2 = "/reload"
 
 SlashCmdList["RCSLASH"] = function() DoReadyCheck() end
 SLASH_RCSLASH1 = "/rc"
-SLASH_RCSLASH2 = "/κρ"
+SLASH_RCSLASH2 = "/readycheck"
 
 SlashCmdList["TICKET"] = function() ToggleHelpFrame() end
 SLASH_TICKET1 = "/ticket"
 SLASH_TICKET2 = "/gm"
-SLASH_TICKET3 = "/γμ"
+
 
 SLASH_FRAME1 = "/frame"
 SlashCmdList["FRAME"] = function(arg)
@@ -36,12 +36,12 @@ SlashCmdList["FRAME"] = function(arg)
 		if arg:GetParent() and arg:GetParent():GetName() then
 			ChatFrame1:AddMessage("Parent: |cffFFD100"..arg:GetParent():GetName())
 		end
- 
+
 		ChatFrame1:AddMessage("Width: |cffFFD100"..format("%.2f",arg:GetWidth()))
 		ChatFrame1:AddMessage("Height: |cffFFD100"..format("%.2f",arg:GetHeight()))
 		ChatFrame1:AddMessage("Strata: |cffFFD100"..arg:GetFrameStrata())
 		ChatFrame1:AddMessage("Level: |cffFFD100"..arg:GetFrameLevel())
- 
+
 		if xOfs then
 			ChatFrame1:AddMessage("X: |cffFFD100"..format("%.2f",xOfs))
 		end
@@ -64,7 +64,7 @@ end
 CheckRole = function()
 	local role = ""
 	local tree = GetSpecialization()
-	
+
 	if tree then
 		role = select(6, GetSpecializationInfo(tree))
 	end
@@ -342,7 +342,7 @@ Fixes:SetScript("OnEvent", function(self, event, ...)
 end)
 
 ----------------------------------------------------------------------------------------
---	Creating Coordinate 
+--	Creating Coordinate
 ----------------------------------------------------------------------------------------
 
 local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
@@ -374,14 +374,14 @@ WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		else
 			coords.PlayerText:SetText(" ")
 		end
-					
+
 		local scale = WorldMapDetailFrame:GetEffectiveScale()
 		local width = WorldMapDetailFrame:GetWidth()
 		local height = WorldMapDetailFrame:GetHeight()
 		local centerX, centerY = WorldMapDetailFrame:GetCenter()
 		local x, y = GetCursorPosition()
 		local adjustedX = (x / scale - (centerX - (width/2))) / width
-		local adjustedY = (centerY + (height/2) - y / scale) / height	
+		local adjustedY = (centerY + (height/2) - y / scale) / height
 
 		if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
 			adjustedX = math.floor(100 * adjustedX)
@@ -389,7 +389,53 @@ WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 			coords.MouseText:SetText(MOUSE_LABEL..":   "..adjustedX..", "..adjustedY)
 		else
 			coords.MouseText:SetText(" ")
-		end				
+		end
 		int = 0
 	end
 end)
+
+
+
+----------------------------------------------------------------------------------------
+--	Speedy Focus
+----------------------------------------------------------------------------------------
+local modifier = "alt" -- shift, alt or ctrl
+local mouseButton = "1" -- 1 = left, 2 = right, 3 = middle, 4 and 5 = thumb buttons if there are any
+
+local function SetFocusHotkey(frame)
+	frame:SetAttribute(modifier.."-type"..mouseButton,"focus")
+end
+
+local function CreateFrame_Hook(type, name, parent, template)
+	if template == "SecureUnitButtonTemplate" then
+			SetFocusHotkey(_G[name])
+	end
+end
+
+hooksecurefunc("CreateFrame", CreateFrame_Hook)
+
+-- Keybinding override so that models can be shift/alt/ctrl+clicked
+local f = CreateFrame("CheckButton", "FocuserButton", UIParent, "SecureActionButtonTemplate")
+f:SetAttribute("type1","macro")
+f:SetAttribute("macrotext","/focus mouseover")
+SetOverrideBindingClick(FocuserButton,true,modifier.."-BUTTON"..mouseButton,"FocuserButton")
+
+-- Set the keybindings on the default unit frames since we won't get any CreateFrame notification about them
+local duf = {
+	PlayerFrame,
+	PetFrame,
+	PartyMemberFrame1,
+	PartyMemberFrame2,
+	PartyMemberFrame3,
+	PartyMemberFrame4,
+	PartyMemberFrame1PetFrame,
+	PartyMemberFrame2PetFrame,
+	PartyMemberFrame3PetFrame,
+	PartyMemberFrame4PetFrame,
+	TargetFrame,
+	TargetofTargetFrame,
+}
+
+for i,frame in pairs(duf) do
+	SetFocusHotkey(frame)
+end

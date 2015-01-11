@@ -1,7 +1,7 @@
 ﻿Qulight["media"] = {
 	["font"] = [=[Fonts\Font.ttf]=], 			        -- main font in Qulight UI
 	["pxfont"] = [=[Fonts\Font.ttf]=],
-	["fontsize"] = 10, 														    		-- size of font
+	["fontsize"] = 14, 														    		-- size of font
 	["texture"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\statusbar4",				-- main texture in Qulight UI
 	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
 	["glow"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\glowTex",
@@ -77,7 +77,7 @@ Qulight["unitframes"] = {
 	["HealthcolorClass"] = false,														-- health color = class color
 	["bigcastbar"] = true,
 		["widthbigcastbar"] = 340,
-		["heightbigcastbar"] = 20,
+		["heightbigcastbar"] = 25,
 	["Powercolor"] = true,																-- power color = class color
 	["showtot"] = true, 																-- show target of target frame
 	["showpet"] = true,																	-- show pet frame
@@ -192,7 +192,7 @@ Qulight["cooldown"] = {
 Qulight["misk"] = {
 	["addonmanager"] = true,														-- enable disable addonmanager
 	["armory_link"] = false,															-- enable armory_link
-	["filger"] = false,																	-- enable disable filger
+	["filger"] = true,																	-- enable disable filger
 	["classtimer"] = false,																-- enable disable classtimer
 	["BuffReminderRaidBuffs"] = true,													-- enable disable raid buffs reminder
 	["Reminder"] = true,																-- enable disable reminder(self buff)

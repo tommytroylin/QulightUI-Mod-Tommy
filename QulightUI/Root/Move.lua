@@ -19,11 +19,11 @@ end
 function framemove(f)
 	f:SetBackdrop({
 		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
-		insets = {left = -1, right = -1, top = -1, bottom = -1} 
+        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
+		insets = {left = -1, right = -1, top = -1, bottom = -1}
 	})
 	f:SetBackdropColor(.05,.05,.05,0.5)
-	f:SetBackdropBorderColor(.23,.45,.13, 1)	
+	f:SetBackdropBorderColor(.23,.45,.13, 1)
 end
 function CreateAnchor(f, text, width, height)
 	f:SetScale(1)
@@ -32,12 +32,12 @@ function CreateAnchor(f, text, width, height)
 	f:SetScript("OnDragStop", OnDragStop)
 	f:SetWidth(width)
 	f:SetHeight(height)
-	
+
 	local h = CreateFrame("Frame", nil)
 	h:SetFrameLevel(30)
 	h:SetAllPoints(f)
 	f.dragtexture = h
-	
+
 	local v = CreateFrame("Frame", nil, h)
 	v:SetPoint("TOPLEFT",0,0)
 	v:SetPoint("BOTTOMRIGHT",0,0)
@@ -106,12 +106,12 @@ function Grid_Hide()
 		grid:Hide()
 	end
 end
-function Grid_Create() 
-	grid = CreateFrame('Frame', nil, UIParent) 
-	grid.boxSize = boxSize 
-	grid:SetAllPoints(UIParent) 
+function Grid_Create()
+	grid = CreateFrame('Frame', nil, UIParent)
+	grid.boxSize = boxSize
+	grid:SetAllPoints(UIParent)
 
-	local size = 2 
+	local size = 2
 	local width = GetScreenWidth()
 	local ratio = width / GetScreenHeight()
 	local height = GetScreenHeight() * ratio
@@ -119,44 +119,44 @@ function Grid_Create()
 	local wStep = width / boxSize
 	local hStep = height / boxSize
 
-	for i = 0, boxSize do 
-		local tx = grid:CreateTexture(nil, 'BACKGROUND') 
-		if i == boxSize / 2 then 
-			tx:SetTexture(1, 0, 0, 0.5) 
-		else 
-			tx:SetTexture(0, 0, 0, 0.5) 
-		end 
-		tx:SetPoint("TOPLEFT", grid, "TOPLEFT", i*wStep - (size/2), 0) 
-		tx:SetPoint('BOTTOMRIGHT', grid, 'BOTTOMLEFT', i*wStep + (size/2), 0) 
-	end 
+	for i = 0, boxSize do
+		local tx = grid:CreateTexture(nil, 'BACKGROUND')
+		if i == boxSize / 2 then
+			tx:SetTexture(1, 0, 0, 0.5)
+		else
+			tx:SetTexture(0, 0, 0, 0.5)
+		end
+		tx:SetPoint("TOPLEFT", grid, "TOPLEFT", i*wStep - (size/2), 0)
+		tx:SetPoint('BOTTOMRIGHT', grid, 'BOTTOMLEFT', i*wStep + (size/2), 0)
+	end
 	height = GetScreenHeight()
-	
+
 	do
-		local tx = grid:CreateTexture(nil, 'BACKGROUND') 
+		local tx = grid:CreateTexture(nil, 'BACKGROUND')
 		tx:SetTexture(1, 0, 0, 0.5)
 		tx:SetPoint("TOPLEFT", grid, "TOPLEFT", 0, -(height/2) + (size/2))
 		tx:SetPoint('BOTTOMRIGHT', grid, 'TOPRIGHT', 0, -(height/2 + size/2))
 	end
-	
+
 	for i = 1, math.floor((height/2)/hStep) do
-		local tx = grid:CreateTexture(nil, 'BACKGROUND') 
+		local tx = grid:CreateTexture(nil, 'BACKGROUND')
 		tx:SetTexture(0, 0, 0, 0.5)
-		
+
 		tx:SetPoint("TOPLEFT", grid, "TOPLEFT", 0, -(height/2+i*hStep) + (size/2))
 		tx:SetPoint('BOTTOMRIGHT', grid, 'TOPRIGHT', 0, -(height/2+i*hStep + size/2))
-		
-		tx = grid:CreateTexture(nil, 'BACKGROUND') 
+
+		tx = grid:CreateTexture(nil, 'BACKGROUND')
 		tx:SetTexture(0, 0, 0, 0.5)
-		
+
 		tx:SetPoint("TOPLEFT", grid, "TOPLEFT", 0, -(height/2-i*hStep) + (size/2))
 		tx:SetPoint('BOTTOMRIGHT', grid, 'TOPRIGHT', 0, -(height/2-i*hStep + size/2))
-		
+
 	end
-	
+
 end
 local function SlashCmd(cmd)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
-	
+
 	if (cmd:match"reset") then
 		AnchorsReset()
 	else
@@ -164,10 +164,10 @@ local function SlashCmd(cmd)
 			t_unlock = true
 			AnchorsUnlock()
 			boxSize = (math.ceil((tonumber(arg) or boxSize) / 32) * 32)
-				 
+
 					Grid_Show()
 					isAligning = true
-				
+
 		elseif t_unlock == true then
 			t_unlock = false
 			AnchorsLock()
@@ -201,14 +201,14 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent(event)
 	RestoreUI(self)
-	
+
 end)
 
 SlashCmdList["ui"] = SlashCmd;
 SLASH_ui1 = "/ui";
 
 AnchorWatchFrame = CreateFrame("Frame","Move_WatchFrame",UIParent)
-AnchorWatchFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 3, -210)
+AnchorWatchFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -70, -185)
 CreateAnchor(AnchorWatchFrame, "Move watch frame", 250, 300)
 
 Anchorplayer = CreateFrame("Frame","Move_player",UIParent)
@@ -224,16 +224,16 @@ Anchorraid:SetPoint("TOPLEFT", 186+62, -25)
 CreateAnchor(Anchorraid, "Move raid", 420, 180)
 
 Anchortot = CreateFrame("Frame","Move_tot",UIParent)
-Anchortot:SetPoint("TOPLEFT", UIParent, "BOTTOM", 440, 300) 
+Anchortot:SetPoint("TOPLEFT", UIParent, "BOTTOM", 440, 300)
 CreateAnchor(Anchortot, "Move tot", 100, 28)
 
 Anchorpet = CreateFrame("Frame","Move_pet",UIParent)
-Anchorpet:SetPoint("TOPRIGHT", UIParent, "BOTTOM", -440, 300) 
+Anchorpet:SetPoint("TOPRIGHT", UIParent, "BOTTOM", -440, 300)
 CreateAnchor(Anchorpet, "Move pet", 100, 28)
 
 if Qulight["unitframes"].bigcastbar then
 	Anchorplayercastbar = CreateFrame("Frame","Move_playercastbar",UIParent)
-	Anchorplayercastbar:SetPoint("BOTTOM", UIParent, "BOTTOM", -1, 218)
+	Anchorplayercastbar:SetPoint("BOTTOM", UIParent, "BOTTOM", -1, 178)
 	CreateAnchor(Anchorplayercastbar, "Move playercastbar", 327, 18)
 
 	Anchortargetcastbar = CreateFrame("Frame","Move_targetcastbar",UIParent)
@@ -242,11 +242,11 @@ if Qulight["unitframes"].bigcastbar then
 end
 
 Anchorfocus = CreateFrame("Frame","Move_focus",UIParent)
-Anchorfocus:SetPoint("BOTTOMLEFT", 435, 400)
+Anchorfocus:SetPoint("LEFT", UIParent, "CENTER", 213, 160)
 CreateAnchor(Anchorfocus, "Move focus", 180, 34)
 
 Anchorfocuscastbar = CreateFrame("Frame","Move_focuscastbar",UIParent)
-Anchorfocuscastbar:SetPoint("BOTTOMLEFT", 457, 440)
+Anchorfocuscastbar:SetPoint("LEFT", UIParent, "CENTER", 235, 130)
 CreateAnchor(Anchorfocuscastbar, "Move focuscastbar", 155, 13)
 
 Anchortank = CreateFrame("Frame","Move_tank",UIParent)

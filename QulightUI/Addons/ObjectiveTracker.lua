@@ -50,7 +50,7 @@ end)
 for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"}) do
 	local header = ObjectiveTrackerFrame.BlocksFrame[headerName].Background:Hide()
 end
-	
+
 	local button = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
 	button:SetSize(17, 17)
 	button.minus = button:CreateTexture(nil, "OVERLAY")
@@ -68,7 +68,7 @@ end
 	button:HookScript("OnEnter", SetModifiedBackdrop)
 	button:HookScript("OnLeave", SetOriginalBackdrop)
 	CreateBD(button, 4)
-	
+
 
 	button.plus:Hide()
 	hooksecurefunc("ObjectiveTracker_Collapse", function()
@@ -77,7 +77,7 @@ end)
 	hooksecurefunc("ObjectiveTracker_Expand", function()
 	button.plus:Hide()
 end)
-	
+
 ----------------------------------------------------------------------------------------
 --	Auto collapse ObjectiveTrackerFrame in instance
 ----------------------------------------------------------------------------------------
