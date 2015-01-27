@@ -20,14 +20,20 @@ for power, color in next, PowerBarColor do
 		end
 	end
 end
---TODO to change the W to k
+
 local function ShortValue(v)
-	if v >= 1e8 then
-		return ("%.2fy"):format(v / 1e8):gsub("%.?0+([km])$", "%1")
-	elseif v >= 1e4 or v <= -1e4 then
-		return ("%.2fw"):format(v / 1e4):gsub("%.?0+([km])$", "%1")
+	if value >= 1e8 then
+		return ("%.0fm"):format(value / 1e6)
+	elseif value >= 1e7 then
+		return ("%.1fm"):format(value / 1e6):gsub("%.?0+([km])$", "%1")
+	elseif value >= 1e6 then
+		return ("%.2fm"):format(value / 1e6):gsub("%.?0+([km])$", "%1")
+	elseif value >= 1e5 then
+		return ("%.0fk"):format(value / 1e3)
+	elseif value >= 1e3 then
+		return ("%.1fk"):format(value / 1e3):gsub("%.?0+([km])$", "%1")
 	else
-		return v
+		return value
 	end
 end
 function tPowerBar:PriestShadow()
