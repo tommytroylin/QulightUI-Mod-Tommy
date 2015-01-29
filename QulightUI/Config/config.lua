@@ -36,7 +36,7 @@ Qulight["raidframes"] = {
 	["deficit_health"] = true,					-- Raid deficit health
 	["vertical_health"] = false,				-- Vertical orientation of health
 	["alpha_health"] = false,					-- Alpha of healthbars when 100%hp
-	["power"] = false,					-- Alpha of healthbars when 100%hp
+	["power"] = true,					-- Alpha of healthbars when 100%hp
 	["show_range"] = true,						-- Show range opacity for raidframes
 	["range_alpha"] = 0.5,						-- Alpha of unitframes when unit is out of range
 	["hp_value"] = true,
@@ -48,7 +48,7 @@ Qulight["raidframes"] = {
 	["solo_mode"] = true,					-- Show player frame always
 	["player_in_party"] = true,					-- Show player frame in party
 	["raid_groups"] = 5,						-- Number of groups in raid
-	["raid_groups_vertical"] = false,			-- Vertical raid groups(only for heal layout)
+	["raid_groups_vertical"] = true,			-- Vertical raid groups(only for heal layout)
 
 	["icons_role"] = true,						-- Role icon on frames
 	["icons_raid_mark"] = true,					-- Raid mark icons on frames
@@ -143,7 +143,7 @@ Qulight["datatext"] = {
 	["color"] = { .7, .7, .7, 1 }, 														-- if ["classcolor"] = false,
 }
 Qulight["nameplate"] = {
-	["enable"] = true, 							-- Enable nameplate
+	["enable"] = false, 							-- Enable nameplate
 	["combat"] = false,							-- Automatically show nameplate in combat
 	["health_value"] = true,					-- Numeral health value
 	["show_castbar_name"] = false,				-- Show castbar name
@@ -192,7 +192,7 @@ Qulight["cooldown"] = {
 Qulight["misk"] = {
 	["addonmanager"] = true,														-- enable disable addonmanager
 	["armory_link"] = false,															-- enable armory_link
-	["filger"] = true,																	-- enable disable filger
+	["filger"] = false,																	-- enable disable filger
 	["classtimer"] = false,																-- enable disable classtimer
 	["BuffReminderRaidBuffs"] = true,													-- enable disable raid buffs reminder
 	["Reminder"] = true,																-- enable disable reminder(self buff)
@@ -203,3 +203,8 @@ Qulight["misk"] = {
 	["raidmarker"] = true,
 	["raidutility"] = true,														-- enable disable raid utility
 }
+Qulight["hide"] = { 															-- hide something
+	["bar4"] = false,
+	["bar5"] = true,
+}
+

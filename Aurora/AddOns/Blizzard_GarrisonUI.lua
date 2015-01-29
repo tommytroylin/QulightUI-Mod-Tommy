@@ -14,6 +14,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	GarrisonBuildingFrame.TitleText:Show()
 
 	F.CreateBD(GarrisonBuildingFrame)
+	F.CreateSD(GarrisonBuildingFrame)
 	F.ReskinClose(GarrisonBuildingFrame.CloseButton)
 
 	-- Tutorial button
@@ -148,6 +149,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	Confirmation:GetRegions():Hide()
 
 	F.CreateBD(Confirmation)
+	F.CreateSD(Confirmation)
 
 	F.Reskin(Confirmation.CancelButton)
 	F.Reskin(Confirmation.BuildButton)
@@ -211,6 +213,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	end
 
 	F.CreateBD(GarrisonLandingPage)
+	F.CreateSD(GarrisonLandingPage)
 	F.ReskinClose(GarrisonLandingPage.CloseButton)
 	F.ReskinTab(GarrisonLandingPageTab1)
 	F.ReskinTab(GarrisonLandingPageTab2)
@@ -328,6 +331,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	GarrisonMissionFrame.TitleText:Show()
 
 	F.CreateBD(GarrisonMissionFrame)
+	F.CreateSD(GarrisonMissionFrame)
 	F.ReskinClose(GarrisonMissionFrame.CloseButton)
 	F.ReskinTab(GarrisonMissionFrameTab1)
 	F.ReskinTab(GarrisonMissionFrameTab2)
@@ -607,6 +611,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	GarrisonRecruitSelectFrame.TitleText:Show()
 
 	F.CreateBD(GarrisonRecruitSelectFrame)
+	F.CreateSD(GarrisonRecruitSelectFrame)
 	F.ReskinClose(GarrisonRecruitSelectFrame.CloseButton)
 
 	-- Follower list

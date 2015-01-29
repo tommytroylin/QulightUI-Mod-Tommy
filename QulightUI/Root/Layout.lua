@@ -97,10 +97,12 @@ if Qulight["actionbar"].enable then
 	QuBar3:SetFrameStrata("BACKGROUND")
 	QuBar3:SetFrameLevel(2)
 
+	if not Qulight["hide"].bar5 then  --hide bar5
 	AnchorQuBar5 = CreateFrame("Frame","Move_Bar5",UIParent)
 	CreateAnchor(AnchorQuBar5, "Move Bar5", (buttonsize * mbWidth) + (buttonspacing * (mbWidth+1)), buttonsize)
-
 	AnchorQuBar5:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 113)
+	end
+
 	local QuBar5 = CreateFrame("Frame", "QuBar5", UIParent)
 	CreatePanel(QuBar5, 1, 1, "TOP", AnchorQuBar5, "TOP")
 	QuBar5:SetWidth((buttonsize * mbWidth) + (buttonspacing * (mbWidth+1)))
@@ -108,8 +110,11 @@ if Qulight["actionbar"].enable then
 	QuBar5:SetFrameStrata("BACKGROUND")
 	QuBar5:SetFrameLevel(2)
 
-	QuBar5:Hide()
-	--hide bar5
+	if Qulight["hide"].bar5 then  --hide bar5
+		QuBar5:Hide()
+	end
+
+	if not Qulight["hide"].bar4 then
 	AnchorQuBar4 = CreateFrame("Frame","Move_Bar4",UIParent)
 		if Qulight["general"].centerpanel then
 			AnchorQuBar4:SetPoint("TOPLEFT", ChatPanelTwo, "TOPLEFT", -3, 53)
@@ -117,7 +122,7 @@ if Qulight["actionbar"].enable then
 			AnchorQuBar4:SetPoint("TOPLEFT", ChatPanelTwo, "TOPLEFT", -3, 36)
 		end
 	CreateAnchor(AnchorQuBar4, "Move Bar4", (buttonsize * 12) + (buttonspacing * 13), buttonsize)
-
+	end
 	local QuBar4 = CreateFrame("Frame", "QuBar4", UIParent)
 	CreatePanel(QuBar4, 20, 20, "TOP", AnchorQuBar4, "TOP")
 	QuBar4:SetWidth((buttonsize * 12) + (buttonspacing * 13))
@@ -127,6 +132,10 @@ if Qulight["actionbar"].enable then
 	QuBar4:SetAlpha(0)
 	QuBar4:SetScale(0.99)
 
+
+	if Qulight["hide"].bar4 then 
+		QuBar4:Hide()
+	end
 	AnchorQuBar6 = CreateFrame("Frame","Move_Bar6",UIParent)
 	AnchorQuBar6:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 41)
 	CreateAnchor(AnchorQuBar6, "Move Bar6", (buttonsize * 12) + (buttonspacing * 13), buttonsize)

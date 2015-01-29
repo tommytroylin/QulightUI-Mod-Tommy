@@ -8,7 +8,7 @@
 	<Script file="Root\Move.lua"/>
 	<Include file="Root\Libs\oUF\oUF.xml"/>
 	<Include file="Addons\Skins\load_addonskins.xml"/>
-	<Script file="Addons\Skins\skins\DefaultSettings.lua"/>
+	<Script file="Config\defaultconfig.lua"/>
 	<Include file="Addons\UF\uf.xml"/>
 	<Include file="Addons\UF\template.xml"/>
 	<Include file="Addons\UF\Raid\load.xml"/>

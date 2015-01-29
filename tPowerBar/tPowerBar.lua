@@ -21,7 +21,7 @@ for power, color in next, PowerBarColor do
 	end
 end
 
-local function ShortValue(v)
+local function ShortValue(value)
 	if value >= 1e8 then
 		return ("%.0fm"):format(value / 1e6)
 	elseif value >= 1e7 then

@@ -639,6 +639,21 @@ function Stuffing:InitBags()
 			end
 		end
 	end)
+	local BagSortButton = CreateFrame("Button", "BagSortButton", f)
+	BagSortButton:SetSize(55, 18)
+	BagSortButton:SetPoint("TOPRIGHT", -28, -6)
+	BagSortButton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	BagSortButton:SetScript("OnClick", function()
+			Stuffing_Sort()
+	end)
+	CreateStyle(BagSortButton, 2)
+	local BagSortButtonString = BagSortButton:CreateFontString("BagSortButton", "OVERLAY")
+	BagSortButtonString:SetFont(Qulight["media"].font, 10, "OUTLINE")
+	BagSortButtonString:SetText("|cff9999ff".." Sort".."|r")
+	BagSortButtonString:SetPoint("CENTER")
+
+
+
 
 	local tooltip_hide = function()
 		GameTooltip:Hide()
@@ -902,9 +917,7 @@ end
 local function StuffingSlashCmd(Cmd)
 	local cmd, args = strsplit(" ", Cmd:lower(), 2)
 
-	if cmd == "config" then
-		Stuffing_OpenConfig()
-	elseif cmd == "sort" then
+	if cmd == "sort" then
 		Stuffing_Sort(args)
 	elseif cmd == "psort" then
 		Stuffing_Sort("c/p")

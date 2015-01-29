@@ -675,8 +675,9 @@ gen_bigcastbar = function(f)
 		s:SetWidth(f:GetWidth()-23)
 	    s:SetPoint("BOTTOM", Anchortargetcastbar, 12, 0)
 	elseif f.mystyle == "focus" then
-		s:SetWidth(f:GetWidth()-18)
-        s:SetPoint("BOTTOM", Anchorfocuscastbar)
+		s:SetHeight(Qulight["unitframes"].heightbigcastbar-5)
+		s:SetWidth(Qulight["unitframes"].widthbigcastbar-50)
+        s:SetPoint("BOTTOM", Anchorfocuscastbar,(Qulight["unitframes"].heightbigcastbar-5)/2,0)
     end
 	if f.mystyle == "boss"  then
 	    s:SetHeight(10)
@@ -1510,7 +1511,11 @@ local function CreateFocusStyle(self, unit, isSingle)
 	if Qulight["unitframes"].HealthcolorClass then
 	self.Health.colorClass = true
 	end
+	if not Qulight["unitframes"].bigcastbar then
 	gen_castbar(self)
+	else
+	gen_bigcastbar(self)
+	end
 	createAuras(self)
 	if Qulight["unitframes"].showPortrait then gen_portrait(self) end
 end
@@ -1781,54 +1786,3 @@ oUF:Factory(function(self)
 end)
 
 
-----------------------------------------------------------------------------------------
---	Test UnitFrames(by community)
-----------------------------------------------------------------------------------------
-SlashCmdList.TEST_UF = function(msg)
-	if msg == "hide" or msg == "ршву" then
-		for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
-			_G[frames].Hide = nil
-		end
-
-
-			for i = 1, 5 do
-				_G["oUF_Arena"..i].Hide = nil
-				_G["oUF_Arena"..i.."Target"].Hide = nil
-			end
-
-
-
-			for i = 1, MAX_BOSS_FRAMES do
-				_G["oUF_Boss"..i].Hide = nil
-			end
-
-	else
-			for i = 1, 5 do
-				_G["oUF_Arena"..i].Hide = function() end
-				_G["oUF_Arena"..i].unit = "player"
-				_G["oUF_Arena"..i]:Show()
-				_G["oUF_Arena"..i]:UpdateAllElements()
-				_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
-
-				_G["oUF_Arena"..i.."Target"].Hide = function() end
-				_G["oUF_Arena"..i.."Target"].unit = "player"
-				_G["oUF_Arena"..i.."Target"]:Show()
-				_G["oUF_Arena"..i.."Target"]:UpdateAllElements()
-
-					_G["oUF_Arena"..i].Talents:SetText(TALENTS)
-
-			end
-
-			for i = 1, MAX_BOSS_FRAMES do
-				_G["oUF_Boss"..i].Hide = function() end
-				_G["oUF_Boss"..i].unit = "player"
-				_G["oUF_Boss"..i]:Show()
-				_G["oUF_Boss"..i]:UpdateAllElements()
-			end
-
-	end
-end
-SLASH_TEST_UF1 = "/testui"
-SLASH_TEST_UF2 = "/еуыегш"
-SLASH_TEST_UF3 = "/testuf"
-SLASH_TEST_UF4 = "/еуыега"
