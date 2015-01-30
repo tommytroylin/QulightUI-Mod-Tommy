@@ -1,23 +1,31 @@
 	if not Qulight["misk"].BuffReminderRaidBuffs == true then return end
 ReminderBuffs = {
 	Flask = {
+			156071,	-- Draenic Strength Flask
+			156077,	-- Draenic Stamina Flask
+			156070,	-- Draenic Intellect Flask
+			156073,	-- Draenic Agility Flask
+			156080,	-- Greater Draenic Strength Flask
+			156064,	-- Greater Draenic Agility Flask
+			156084,	-- Greater Draenic Stamina Flask
+			156079,	-- Greater Draenic Intellect Flask
+			105694,	-- Flask of the Earth
 			105691,	-- Flask of the Warm Sun
 			105696,	-- Flask of Winter's Bite
 			105693,	-- Flask of Falling Leaves
 			105689,	-- Flask of Spring Blossoms
-			105694,	-- Flask of the Earth
 		},
 		BattleElixir = {
+			105686,	-- Elixir of Perfection
 			105688,	-- Monk's Elixir
 			105685,	-- Elixir of Peace
 			105682,	-- Mad Hozen Elixir
 			105683,	-- Elixir of Weaponry
 			105684,	-- Elixir of the Rapids
-			105686,	-- Elixir of Perfection
 		},
 		GuardianElixir = {
-			105681,	-- Mantid Elixir
 			105687,	-- Elixir of Mirrors
+			105681,	-- Mantid Elixir
 		},
 		Food = {
 			104280,	-- Well Fed

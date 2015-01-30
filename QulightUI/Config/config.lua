@@ -36,18 +36,18 @@ Qulight["raidframes"] = {
 	["deficit_health"] = true,					-- Raid deficit health
 	["vertical_health"] = false,				-- Vertical orientation of health
 	["alpha_health"] = false,					-- Alpha of healthbars when 100%hp
-	["power"] = false,					-- Alpha of healthbars when 100%hp
+	["power"] = true,					-- Alpha of healthbars when 100%hp
 	["show_range"] = true,						-- Show range opacity for raidframes
-	["range_alpha"] = 0.5,						-- Alpha of unitframes when unit is out of range
-	["hp_value"] = true,						
-	["width"] = 80,						
-	["height"] = 30,						
+	["range_alpha"] = 0.7,						-- Alpha of unitframes when unit is out of range
+	["hp_value"] = false,						
+	["width"] = 81.7,						
+	["height"] = 32,						
 
 	["show_party"] = true,						-- Show party frames
 	["show_raid"] = true,						-- Show raid frames
 	["solo_mode"] = false,					-- Show player frame always
 	["player_in_party"] = true,					-- Show player frame in party
-	["raid_groups"] = 5,						-- Number of groups in raid
+	["raid_groups"] = 4,						-- Number of groups in raid
 	["raid_groups_vertical"] = false,			-- Vertical raid groups(only for heal layout)
 
 	["icons_role"] = true,						-- Role icon on frames

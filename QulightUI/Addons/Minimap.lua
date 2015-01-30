@@ -122,7 +122,7 @@ MiniMapMailBorder:Hide()
 GarrisonLandingPageMinimapButton:ClearAllPoints()
 GarrisonLandingPageMinimapButton:SetParent(Minimap)
 GarrisonLandingPageMinimapButton:SetSize(35,35)
-GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
+GarrisonLandingPageMinimapButton:SetPoint("BOTTOMLEFT", 5, 0)
 
 MiniMapTracking:ClearAllPoints()
 MiniMapTracking:SetParent(Minimap)

@@ -242,11 +242,11 @@ if Qulight["unitframes"].bigcastbar then
 end
 
 Anchorfocus = CreateFrame("Frame","Move_focus",UIParent)
-Anchorfocus:SetPoint("BOTTOMLEFT", 435, 400) 
+Anchorfocus:SetPoint("BOTTOMLEFT", 435, 500) 
 CreateAnchor(Anchorfocus, "Move focus", 180, 34)
 
 Anchorfocuscastbar = CreateFrame("Frame","Move_focuscastbar",UIParent)
-Anchorfocuscastbar:SetPoint("BOTTOMLEFT", 457, 440) 
+Anchorfocuscastbar:SetPoint("BOTTOMLEFT", 457, 540) 
 CreateAnchor(Anchorfocuscastbar, "Move focuscastbar", 155, 13)
 
 Anchortank = CreateFrame("Frame","Move_tank",UIParent)
