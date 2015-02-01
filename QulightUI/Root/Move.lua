@@ -158,6 +158,10 @@ local function SlashCmd(cmd)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 
 	if (cmd:match"reset") then
+		t_unlock = false
+			AnchorsLock()
+			Grid_Hide()
+            isAligning = false
 		AnchorsReset()
 	else
 		if t_unlock == false then

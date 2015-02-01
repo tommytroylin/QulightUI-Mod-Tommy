@@ -213,7 +213,7 @@ C.modules["Blizzard_GarrisonUI"] = function()
 	end
 
 	F.CreateBD(GarrisonLandingPage)
-	F.CreateSD(GarrisonLandingPage)
+	CreateStyle(GarrisonLandingPage, 2)
 	F.ReskinClose(GarrisonLandingPage.CloseButton)
 	F.ReskinTab(GarrisonLandingPageTab1)
 	F.ReskinTab(GarrisonLandingPageTab2)

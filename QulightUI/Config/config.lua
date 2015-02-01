@@ -1,6 +1,7 @@
 ﻿Qulight["media"] = {
 	["font"] = [=[Fonts\Font.ttf]=], 			        -- main font in Qulight UI
 	["pxfont"] = [=[Fonts\Font.ttf]=],
+	["combatfont"] = [=[Fonts\ARKai_C.ttf]=],
 	["fontsize"] = 14, 														    		-- size of font
 	["texture"] = "Interface\\AddOns\\QulightUI\\Root\\Media\\statusbar4",				-- main texture in Qulight UI
 	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
@@ -75,10 +76,11 @@ Qulight["raidframes"] = {
 Qulight["unitframes"] = {
 	["enable"] = true,																	-- enable/disable action bars
 	["HealthcolorClass"] = false,														-- health color = class color
-	["bigcastbar"] = true,
+	["bigcastbar"] = true,																-- must be true
 		["widthbigcastbar"] = 340,
 		["heightbigcastbar"] = 25,
 	["Powercolor"] = true,																-- power color = class color
+	["AltPowerBar"] = true,
 	["showtot"] = true, 																-- show target of target frame
 	["showpet"] = true,																	-- show pet frame
 	["showfocus"] = true, 																-- show focus frame
@@ -143,8 +145,7 @@ Qulight["datatext"] = {
 	["color"] = { .7, .7, .7, 1 }, 														-- if ["classcolor"] = false,
 }
 Qulight["nameplate"] = {
-	["enable"] = false, 							-- Enable nameplate
-	["combat"] = false,							-- Automatically show nameplate in combat
+	["enable"] = true,							-- Automatically show nameplate in combat
 	["health_value"] = true,					-- Numeral health value
 	["show_castbar_name"] = false,				-- Show castbar name
 	["enhance_threat"] = true,					-- If tank good aggro = green, bad = red
@@ -192,7 +193,7 @@ Qulight["cooldown"] = {
 Qulight["misk"] = {
 	["addonmanager"] = true,														-- enable disable addonmanager
 	["armory_link"] = false,															-- enable armory_link
-	["filger"] = false,																	-- enable disable filger
+	["filger"] = true,																	-- enable disable filger
 	["classtimer"] = false,																-- enable disable classtimer
 	["BuffReminderRaidBuffs"] = true,													-- enable disable raid buffs reminder
 	["Reminder"] = true,																-- enable disable reminder(self buff)
@@ -206,5 +207,7 @@ Qulight["misk"] = {
 Qulight["hide"] = { 															-- hide something
 	["bar4"] = false,
 	["bar5"] = true,
+	["health"] = false,
+	["power"] = false,
 }
 

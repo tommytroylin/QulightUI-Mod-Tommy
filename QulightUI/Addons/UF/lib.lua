@@ -1315,6 +1315,7 @@ genShadowOrbsBar = function(self)
 	end
 end
 AltPowerBar = function(self)
+	if not Qulight["unitframes"].AltPowerBar then return end
 	local AltPowerBar = CreateFrame("StatusBar", nil, self.Health)
 
 	AltPowerBar:SetHeight(5)

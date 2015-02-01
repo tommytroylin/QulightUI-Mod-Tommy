@@ -33,6 +33,9 @@ local Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
+	--DropDownListTooltip1,
+	--DropDownListTooltip2,
+	--DropDownListTooltip3,
 }
  
 for _, tt in pairs(Tooltips) do
@@ -201,7 +204,7 @@ local function StatusBarOnValueChanged(self, value)
 			if not self.text then
 				self.text = self:CreateFontString(nil, "OVERLAY")
 				self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 1.5)
-				self.text:SetFont(Qulight["media"].font, 10, "THINOUTLINE")
+				self.text:SetFont(Qulight["media"].font, 11, "THINOUTLINE")
 			end
 		self.text:Show()
 		local hp = ShortValue(min).." / "..ShortValue(max)
@@ -371,7 +374,7 @@ oUF_colors = setmetatable({
  
 local BorderColor = function(self)
 	local GetMouseFocus = GetMouseFocus()
-	local unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
+	local unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit")) or (UnitExists("mouseover") and "mouseover") or nil
 		
 	if (not Unit) and (UnitExists("mouseover")) then
 		Unit = 'mouseover'
@@ -420,19 +423,19 @@ local SetStyle = function(self)
 	BorderColor(self)
 end
  
-local SetStyleSafely = function(self)
+--local SetStyleSafely = function(self)
 	--frame1px(self)
-	CreateShadowTooltip(self)
-	BorderColor(self)
-end
+	--CreateShadowTooltip(self)
+	--BorderColor(self)
+--end
  
 Tooltip:RegisterEvent("PLAYER_ENTERING_WORLD")
 Tooltip:RegisterEvent("ADDON_LOADED")
 Tooltip:SetScript("OnEvent", function(self, event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
-		for _, tt in pairs(Tooltips) do
-			tt:HookScript("OnShow", SetStyleSafely)
-		end
+		--for _, tt in pairs(Tooltips) do
+			--tt:HookScript("OnShow", SetStyleSafely)
+		--end
  
 		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 		ItemRefTooltip:HookScript("OnShow", SetStyle)	

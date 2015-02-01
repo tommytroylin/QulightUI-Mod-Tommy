@@ -393,8 +393,7 @@ WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		int = 0
 	end
 end)
-
-
+-- add downhere
 
 ----------------------------------------------------------------------------------------
 --	Speedy Focus
@@ -439,3 +438,243 @@ local duf = {
 for i,frame in pairs(duf) do
 	SetFocusHotkey(frame)
 end
+
+----------------------------------------------------------------------------------------
+--	low health
+----------------------------------------------------------------------------------------
+
+local LowHealthFrame = CreateFrame("Frame", "NephHealthFrame", UIParent)
+LowHealthFrame:SetAllPoints() 
+LowHealthFrame:SetFrameStrata("BACKGROUND")
+LowHealthFrame:RegisterUnitEvent("UNIT_HEALTH", "player")
+LowHealthFrame:SetScript("OnEvent", function(self, event, ...) self[event](self, event, ...) end)
+
+local warningTexture = LowHealthFrame:CreateTexture(nil, "BACKGROUND")
+warningTexture:SetTexture("Interface\\FullScreenTextures\\LowHealth")
+warningTexture:SetAllPoints(LowHealthFrame)
+warningTexture:SetBlendMode("ADD")
+LowHealthFrame.texture = warningTexture
+
+local showWarning = false
+LowHealthFrame:Hide()
+
+function NephHealthFrame:UNIT_HEALTH(_, arg1)
+	if UnitIsDeadOrGhost("player") then
+		if showWarning then
+			showWarning = false
+			LowHealthFrame:Hide()
+		end
+	else
+		local lowHealth = (UnitHealth("player") / UnitHealthMax("player") < 0.3)
+		if lowHealth and not showWarning then
+			showWarning = true
+			LowHealthFrame:Show()
+			PlaySoundFile("Sound\\interface\\RaidWarning.wav") --TODO
+		elseif not lowHealth and showWarning then
+			showWarning = false
+			LowHealthFrame:Hide()
+		end
+	end
+end
+----------------------------------------------------------------------------------------
+--	Bulkie
+----------------------------------------------------------------------------------------
+local THROTTLE = 0.33 
+local TITLE = 'Queue To Max'
+if GetLocale() == 'zhCN' then 
+   TITLE = '一键全部下单'
+elseif GetLocale() == 'zhTW' then 
+   TITLE = '一鍵全部訂單'
+end 
+
+local BulkieDisplayFrame = CreateFrame('Frame', 'BulkieFrame', UIParent) 
+BulkieDisplayFrame:SetFrameStrata('DIALOG') 
+BulkieDisplayFrame:SetToplevel(true) 
+BulkieDisplayFrame:EnableMouse(true) 
+BulkieDisplayFrame:SetClampedToScreen(true) 
+BulkieDisplayFrame:SetWidth(340) 
+BulkieDisplayFrame:SetHeight(50) 
+BulkieDisplayFrame:SetPoint('TOPLEFT', 13, -470) 
+BulkieDisplayFrame:Hide() 
+
+-- create title 
+local title = BulkieDisplayFrame:CreateFontString (nil, "ARTWORK", "GameFontNormalLarge") 
+title:SetPoint("TOPLEFT", 16, -16) 
+title:SetText("") 
+BulkieDisplayFrame.Title = title 
+
+-- create button 
+local button = CreateFrame('Button', 'BulkieBulkButton', BulkieDisplayFrame) 
+button:SetPoint("TOPRIGHT", -5, -21) 
+button:SetWidth(160) 
+button:SetHeight(22)
+local buttonbgtexture = button:CreateTexture("BulkieBulkButtonBG", "OVERLAY")
+CreateStyle(button,2)
+button:Show() 
+
+local buttonString = button:CreateFontString("BulkieButton", "OVERLAY")
+	buttonString:SetFont(Qulight["media"].font, 10, "OUTLINE")
+	buttonString:SetText(TITLE)
+	buttonString:SetPoint("CENTER")
+
+-- register events 
+BulkieDisplayFrame:RegisterEvent("SHIPMENT_CRAFTER_OPENED") 
+BulkieDisplayFrame:RegisterEvent("SHIPMENT_CRAFTER_CLOSED") 
+BulkieDisplayFrame:RegisterEvent("SHIPMENT_CRAFTER_INFO") 
+
+function BulkieDisplayFrame:SHIPMENT_CRAFTER_OPENED (containerID) 
+  BulkieDisplayFrame:Show() 
+  self:SetScript("OnUpdate", nil) 
+end 
+
+function BulkieDisplayFrame:SHIPMENT_CRAFTER_CLOSED () 
+  BulkieDisplayFrame:Hide() 
+  self:SetScript("OnUpdate", nil) 
+end 
+
+function BulkieDisplayFrame:SHIPMENT_CRAFTER_INFO (success, _, maxShipments, plotID) 
+  self.maxShipments = maxShipments 
+  if self.maxShipments == C_Garrison.GetNumPendingShipments() then 
+    button:Disable() 
+  else 
+    button:Enable() 
+  end 
+end 
+
+-- set the click handler 
+button:SetScript('OnClick', function(self) 
+  BulkieDisplayFrame.elapsed = 0 
+  BulkieDisplayFrame:SetScript("OnUpdate", function (self, elapsed) 
+    self.elapsed = self.elapsed + elapsed 
+    if self.elapsed > THROTTLE then 
+      self.elapsed = 0 
+      C_Garrison.RequestShipmentCreation() 
+      if self.maxShipments == C_Garrison.GetNumPendingShipments() then 
+        self:SetScript("OnUpdate", nil) 
+        button:Disable() 
+      end 
+    end 
+  end) 
+end) 
+
+-- set handlers for frame events 
+BulkieDisplayFrame:SetScript ("OnEvent", function (self, event, ...) 
+  if self[event] then 
+    self[event] (self, ...) 
+  end 
+end)
+
+---------------------------------------------------------------------------------------
+--	任务栏自动收起/副本任务不收
+---------------------------------------------------------------------------------------
+local autocollapse = CreateFrame("Frame") 
+autocollapse:RegisterEvent("ZONE_CHANGED_NEW_AREA") 
+autocollapse:RegisterEvent("PLAYER_ENTERING_WORLD") 
+autocollapse:SetScript("OnEvent", function(self) 
+if IsInInstance() then 
+ObjectiveTrackerFrame.userCollapsed = true 
+ObjectiveTracker_Collapse() 
+elseif IsInInstance() and not ScenarioBlocksFrame:IsVisible() then 
+ObjectiveTrackerFrame.userCollapsed = nil 
+ObjectiveTracker_Expand()
+else
+ObjectiveTrackerFrame.userCollapsed = nil 
+ObjectiveTracker_Expand() 
+end 
+end)
+
+---------------------------------------------------------------------------------------
+--	单刷坐骑副本提示
+---------------------------------------------------------------------------------------
+local instList = { 
+   [556] = 2,      -- 塞塔克大厅，乌鸦 
+   [575] = 2,      -- 乌特加德之巅，蓝龙 
+   [585] = 2,      -- 魔导师平台，白鸡 
+   [603] = 4,      -- 奥杜尔，飞机头 
+   [631] = 6,      -- 冰冠堡垒，无敌 
+} 
+
+local f = CreateFrame("Frame") 
+f:RegisterEvent("ZONE_CHANGED_NEW_AREA") 
+f:RegisterEvent("PLAYER_DIFFICULTY_CHANGED") 
+f:RegisterEvent("PLAYER_ENTERING_WORLD") 
+f:SetScript("OnEvent", function() 
+   local name, _, instType, diffname, _, _, _, id = GetInstanceInfo() 
+   if IsInInstance() then 
+      if instList[id] and instList[id] ~= instType then 
+         UIErrorsFrame:AddMessage(name.."-"..diffname.." 你确定选对难度了？", 1, .1, .1) 
+      end 
+   end 
+end)
+
+
+------------------------
+--auto choose the dearest things
+------------------------
+local frame = CreateFrame("FRAME", "GreedyQuester", UIParent)
+frame:RegisterEvent("QUEST_COMPLETE")
+frame:SetScript("OnEvent", function() 
+  local max, max_index = 0, 0
+  for x=1,GetNumQuestChoices() do 
+    local item = GetQuestItemLink("choice", x)
+    if item then
+      local price = select(11, GetItemInfo(item))
+      if price > max then
+        max, max_index = price, x
+      end
+    end
+  end
+  local button = _G["QuestInfoItem"..max_index]
+  if button then button:Click() end
+end)
+
+---------------------------------------------------------------------------------------
+--	谁在点击小地图
+---------------------------------------------------------------------------------------
+local addon = CreateFrame('ScrollingMessageFrame', false, Minimap) 
+addon:SetHeight(10) 
+addon:SetWidth(100) 
+addon:SetPoint('TOP', Minimap, 0, -15) 
+
+addon:SetFont(STANDARD_TEXT_FONT, 12, 'OUTLINE') 
+addon:SetJustifyH'CENTER' 
+addon:SetJustifyV'CENTER' 
+addon:SetMaxLines(1) 
+addon:SetFading(true) 
+addon:SetFadeDuration(3) 
+addon:SetTimeVisible(5) 
+
+addon:RegisterEvent'MINIMAP_PING' 
+addon:SetScript('OnEvent', function(self, event, u) 
+   local c = RAID_CLASS_COLORS[select(2,UnitClass(u))] 
+   local name = UnitName(u) 
+   addon:AddMessage(name, c.r, c.g, c.b) 
+end)
+
+--------------------------------------------
+-- 不再显示XX制作
+--------------------------------------------
+ITEM_CREATED_BY=""
+
+--------------------------------------------
+-- 打开银行自动存材料
+--------------------------------------------
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("BANKFRAME_OPENED")
+frame:SetScript("OnEvent", function(self, event, ...)
+	if not BankFrameItemButton_Update_OLD then
+		BankFrameItemButton_Update_OLD = BankFrameItemButton_Update
+		
+		BankFrameItemButton_Update = function(button)
+			if BankFrameItemButton_Update_PASS == false then
+				BankFrameItemButton_Update_OLD(button)
+			else
+				BankFrameItemButton_Update_PASS = false
+			end
+		end
+	end
+	
+	BankFrameItemButton_Update_PASS = true
+	DepositReagentBank()
+	--print("Reagents deposited into Reagent Bank.")
+end)

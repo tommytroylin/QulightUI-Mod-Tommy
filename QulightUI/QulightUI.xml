@@ -24,7 +24,7 @@
 	<Script file="Root\Layout.lua"/>
 	<Script file="Root\Tweaks.lua"/>
 	<Script file="Root\Mirror.lua"/>
-
+	<Script file="Root\HealthPercentage.lua"/>
 	<Script file="Addons\Actionbars\Hide.lua"/>
 	<Script file="Addons\Actionbars\Bar1.lua"/>
 	<Script file="Addons\Actionbars\Bar2.lua"/>
@@ -82,4 +82,5 @@
 	<Script file="Addons\Filger.lua"/>
 	<Script file="Addons\Threatbar.lua"/>
 	<Script file="Addons\raidmarker.lua"/>
+	<Script file="Addons\AFKCamera.lua"/>
 </Ui>

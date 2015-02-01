@@ -73,7 +73,6 @@ tinsert(C.modules["Aurora"], function()
 	challenge:SetPoint("BOTTOMRIGHT", -8, 13)
 	challenge:SetFrameLevel(GuildChallengeAlertFrame:GetFrameLevel()-1)
 	F.CreateBD(challenge)
-	F.CreateSD(challenge)
 	F.CreateBG(GuildChallengeAlertFrameEmblemBackground)
 
 	GuildChallengeAlertFrameGlow:SetTexture("")
@@ -87,7 +86,7 @@ tinsert(C.modules["Aurora"], function()
 	bg:SetPoint("BOTTOMRIGHT", -6, 6)
 	bg:SetFrameLevel(DungeonCompletionAlertFrame1:GetFrameLevel()-1)
 	F.CreateBD(bg)
-	F.CreateSD(bg)
+
 	DungeonCompletionAlertFrame1DungeonTexture:SetDrawLayer("ARTWORK")
 	DungeonCompletionAlertFrame1DungeonTexture:SetTexCoord(.02, .98, .02, .98)
 	F.CreateBG(DungeonCompletionAlertFrame1DungeonTexture)
@@ -176,7 +175,7 @@ tinsert(C.modules["Aurora"], function()
 				frame.bg:SetPoint("BOTTOMRIGHT", ScenarioAlertFrame1DungeonTexture, 244, -12)
 				frame.bg:SetFrameLevel(frame:GetFrameLevel()-1)
 				F.CreateBD(frame.bg)
-				
+
 				frame:HookScript("OnEnter", fixBg)
 				frame:HookScript("OnShow", fixBg)
 				frame.animIn:HookScript("OnFinished", fixBg)
@@ -352,7 +351,7 @@ tinsert(C.modules["Aurora"], function()
 		bg:SetPoint("BOTTOMRIGHT", -8, 10)
 		bg:SetFrameLevel(frame:GetFrameLevel()-1)
 		F.CreateBD(bg)
-		F.CreateSD(bg)
+
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:SetDrawLayer("ARTWORK")
 		F.CreateBG(icon)
@@ -373,7 +372,6 @@ tinsert(C.modules["Aurora"], function()
 		bg:SetPoint("BOTTOMRIGHT", -8, 10)
 		bg:SetFrameLevel(frame:GetFrameLevel()-1)
 		F.CreateBD(bg)
-		F.CreateSD(bg)
 	end
 
 	-- Garrison follower alert
@@ -391,7 +389,7 @@ tinsert(C.modules["Aurora"], function()
 		bg:SetPoint("BOTTOMRIGHT", -16, 16)
 		bg:SetFrameLevel(frame:GetFrameLevel()-1)
 		F.CreateBD(bg)
-		F.CreateSD(bg)
+
 		F.ReskinGarrisonPortrait(frame.PortraitFrame)
 	end
 

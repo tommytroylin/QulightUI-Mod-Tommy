@@ -24,7 +24,7 @@ Fonts:RegisterEvent("ADDON_LOADED")
 Fonts:SetScript("OnEvent", function(self, event, addon)
 	
 	local NORMAL     =  Qulight["media"].font
-	local COMBAT     =  Qulight["media"].font
+	local COMBAT     =  Qulight["media"].combatfont
 	local NUMBER     =  Qulight["media"].font
 	local _, editBoxFontSize, _, _, _, _, _, _, _, _ = GetChatWindowInfo(1)
 	

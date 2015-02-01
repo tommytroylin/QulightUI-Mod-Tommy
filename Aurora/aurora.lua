@@ -33,7 +33,7 @@ C.media = {
 	["arrowRight"] = "Interface\\AddOns\\Aurora\\media\\arrow-right-active",
 	["backdrop"] = Qulight["media"].texture,
 	["checked"] = "Interface\\AddOns\\Aurora\\media\\CheckButtonHilight",
-	["font"] = [=[Fonts\Font.ttf]=],
+	["font"] = [=[Interface\Addons\QulightUI\Root\Media\qFont.ttf]=],
 	["glow"] = Qulight["media"].glow,
 	["gradient"] = "Interface\\AddOns\\Aurora\\media\\gradient",
 	["roleIcons"] = "Interface\\AddOns\\Aurora\\media\\UI-LFG-ICON-ROLES",
@@ -91,7 +91,7 @@ end
 
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	local sd = CreateFrame("Frame", nil, parent)
-	sd.size = size or 5
+	sd.size = size or 5	
 	sd.offset = offset or 0
 	sd:SetBackdrop({
 		edgeFile = C.media.glow,
@@ -613,7 +613,7 @@ F.ReskinFilterButton = function(f)
 	f.MiddleRight:Hide()
 	f.BottomMiddle:Hide()
 	f.MiddleMiddle:Hide()
-
+	
 	F.Reskin(f)
 	f.Icon:SetTexture(C.media.arrowRight)
 
@@ -664,7 +664,7 @@ F.ReskinGarrisonPortrait = function(portrait)
 
 	F.CreateBD(squareBG, 1)
 	portrait.squareBG = squareBG
-
+	
 	if cover then
 		cover:SetTexture(0, 0, 0)
 		cover:SetAllPoints(squareBG)
@@ -739,7 +739,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	if addon == "Aurora" then
-
+	
 		-- [[ Headers ]]
 
 		local header = {"GameMenuFrame", "InterfaceOptionsFrame", "AudioOptionsFrame", "VideoOptionsFrame", "ChatConfigFrame", "ColorPickerFrame"}
@@ -1994,7 +1994,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.CreateBD(EquipmentFlyoutFrame.NavigationFrame)
 		F.ReskinArrow(EquipmentFlyoutFrame.NavigationFrame.PrevButton, "left")
 		F.ReskinArrow(EquipmentFlyoutFrame.NavigationFrame.NextButton, "right")
-
+	
 	-- QuestMapFrame
 
 local QuestMapFrame = QuestMapFrame
@@ -2917,7 +2917,7 @@ local QuestMapFrame = QuestMapFrame
 		F.Reskin(GuildRegistrarFrameGoodbyeButton)
 		F.Reskin(GuildRegistrarFramePurchaseButton)
 		F.Reskin(GuildRegistrarFrameCancelButton)
-
+		
 
 		-- Item text
 
@@ -3447,7 +3447,7 @@ local QuestMapFrame = QuestMapFrame
 	F.ReskinClose(LFGDungeonReadyStatusCloseButton)
 
 	for _, roleButton in pairs({LFDQueueFrameRoleButtonTank, LFDQueueFrameRoleButtonHealer, LFDQueueFrameRoleButtonDPS, LFDQueueFrameRoleButtonLeader, LFRQueueFrameRoleButtonTank, LFRQueueFrameRoleButtonHealer, LFRQueueFrameRoleButtonDPS, RaidFinderQueueFrameRoleButtonTank, RaidFinderQueueFrameRoleButtonHealer, RaidFinderQueueFrameRoleButtonDPS, RaidFinderQueueFrameRoleButtonLeader}) do
-
+		
 		roleButton.cover:SetTexture(C.media.roleIcons)
 		roleButton:SetNormalTexture(C.media.roleIcons)
 
@@ -3950,7 +3950,7 @@ local QuestMapFrame = QuestMapFrame
 
 		-- [[ Buttons ]]
 
-		local buttons = {"VideoOptionsFrameOkay", "GameMenuButtonQulightUI", "OpenAllButton2", "OpenAllButton", "VideoOptionsFrameCancel", "VideoOptionsFrameDefaults", "VideoOptionsFrameApply", "AudioOptionsFrameOkay", "AudioOptionsFrameCancel", "AudioOptionsFrameDefaults", "InterfaceOptionsFrameDefaults", "InterfaceOptionsFrameOkay", "InterfaceOptionsFrameCancel", "ChatConfigFrameOkayButton", "ChatConfigFrameDefaultButton", "DressUpFrameCancelButton", "DressUpFrameResetButton", "WhoFrameWhoButton", "WhoFrameAddFriendButton", "WhoFrameGroupInviteButton", "SendMailMailButton", "SendMailCancelButton", "OpenMailReplyButton", "OpenMailDeleteButton", "OpenMailCancelButton", "OpenMailReportSpamButton", "ChannelFrameNewButton", "RaidFrameRaidInfoButton", "RaidFrameRaidBrowserButton", "RaidFrameConvertToRaidButton", "GearManagerDialogPopupOkay", "GearManagerDialogPopupCancel", "StackSplitOkayButton", "StackSplitCancelButton", "GameMenuButtonHelp", "GameMenuButtonWhatsNew", "GameMenuButtonStore", "GameMenuButtonOptions", "GameMenuButtonUIOptions", "GameMenuButtonKeybindings", "GameMenuButtonMacros", "GameMenuButtonAddons", "GameMenuButtonLogout", "GameMenuButtonQuit", "GameMenuButtonContinue", "GameMenuButtonMacOptions", "LFDQueueFrameFindGroupButton", "AddFriendEntryFrameAcceptButton", "AddFriendEntryFrameCancelButton", "FriendsFriendsSendRequestButton", "FriendsFriendsCloseButton", "ColorPickerOkayButton", "ColorPickerCancelButton", "GuildInviteFrameJoinButton", "GuildInviteFrameDeclineButton", "FriendsFramePendingButton1AcceptButton", "FriendsFramePendingButton1DeclineButton", "RaidInfoExtendButton", "RaidInfoCancelButton", "PaperDollEquipmentManagerPaneEquipSet", "PaperDollEquipmentManagerPaneSaveSet", "HelpFrameAccountSecurityOpenTicket", "HelpFrameCharacterStuckStuck", "HelpFrameOpenTicketHelpTopIssues", "HelpFrameOpenTicketHelpOpenTicket", "ReadyCheckFrameYesButton", "ReadyCheckFrameNoButton", "HelpFrameTicketSubmit", "HelpFrameTicketCancel", "HelpFrameKnowledgebaseSearchButton", "GhostFrame", "HelpFrameGM_ResponseNeedMoreHelp", "HelpFrameGM_ResponseCancel", "GMChatOpenLog", "HelpFrameKnowledgebaseNavBarHomeButton", "AddFriendInfoFrameContinueButton", "LFDQueueFramePartyBackfillBackfillButton", "LFDQueueFramePartyBackfillNoBackfillButton", "ChannelFrameDaughterFrameOkayButton", "ChannelFrameDaughterFrameCancelButton", "PendingListInfoFrameContinueButton", "LFDQueueFrameNoLFDWhileLFRLeaveQueueButton", "InterfaceOptionsHelpPanelResetTutorials", "RaidFinderFrameFindRaidButton", "RaidFinderQueueFrameIneligibleFrameLeaveQueueButton", "SideDressUpModelResetButton", "RaidFinderQueueFramePartyBackfillBackfillButton", "RaidFinderQueueFramePartyBackfillNoBackfillButton", "ScrollOfResurrectionSelectionFrameAcceptButton", "ScrollOfResurrectionSelectionFrameCancelButton", "ScrollOfResurrectionFrameAcceptButton", "ScrollOfResurrectionFrameCancelButton", "HelpFrameReportBugSubmit", "HelpFrameSubmitSuggestionSubmit", "ReportPlayerNameDialogReportButton", "ReportPlayerNameDialogCancelButton", "ReportCheatingDialogReportButton", "ReportCheatingDialogCancelButton", "HelpFrameOpenTicketHelpItemRestoration"}
+		local buttons = {"VideoOptionsFrameOkay", "GameMenuButtonQulightUI", "OpenAllButton2", "OpenAllButton", "VideoOptionsFrameCancel", "VideoOptionsFrameDefaults", "VideoOptionsFrameApply", "AudioOptionsFrameOkay", "AudioOptionsFrameCancel", "AudioOptionsFrameDefaults", "InterfaceOptionsFrameDefaults", "InterfaceOptionsFrameOkay", "InterfaceOptionsFrameCancel", "ChatConfigFrameOkayButton", "ChatConfigFrameDefaultButton", "DressUpFrameCancelButton", "DressUpFrameResetButton", "WhoFrameWhoButton", "WhoFrameAddFriendButton", "WhoFrameGroupInviteButton", "SendMailMailButton", "SendMailCancelButton", "OpenMailReplyButton", "OpenMailDeleteButton", "OpenMailCancelButton", "OpenMailReportSpamButton", "ChannelFrameNewButton", "RaidFrameRaidInfoButton", "RaidFrameConvertToRaidButton", "GearManagerDialogPopupOkay", "GearManagerDialogPopupCancel", "StackSplitOkayButton", "StackSplitCancelButton", "GameMenuButtonHelp", "GameMenuButtonWhatsNew", "GameMenuButtonStore", "GameMenuButtonOptions", "GameMenuButtonUIOptions", "GameMenuButtonKeybindings", "GameMenuButtonMacros", "GameMenuButtonAddons", "GameMenuButtonLogout", "GameMenuButtonQuit", "GameMenuButtonContinue", "GameMenuButtonMacOptions", "LFDQueueFrameFindGroupButton", "AddFriendEntryFrameAcceptButton", "AddFriendEntryFrameCancelButton", "FriendsFriendsSendRequestButton", "FriendsFriendsCloseButton", "ColorPickerOkayButton", "ColorPickerCancelButton", "GuildInviteFrameJoinButton", "GuildInviteFrameDeclineButton", "FriendsFramePendingButton1AcceptButton", "FriendsFramePendingButton1DeclineButton", "RaidInfoExtendButton", "RaidInfoCancelButton", "PaperDollEquipmentManagerPaneEquipSet", "PaperDollEquipmentManagerPaneSaveSet", "HelpFrameAccountSecurityOpenTicket", "HelpFrameCharacterStuckStuck", "HelpFrameOpenTicketHelpTopIssues", "HelpFrameOpenTicketHelpOpenTicket", "ReadyCheckFrameYesButton", "ReadyCheckFrameNoButton", "HelpFrameTicketSubmit", "HelpFrameTicketCancel", "HelpFrameKnowledgebaseSearchButton", "GhostFrame", "HelpFrameGM_ResponseNeedMoreHelp", "HelpFrameGM_ResponseCancel", "GMChatOpenLog", "HelpFrameKnowledgebaseNavBarHomeButton", "AddFriendInfoFrameContinueButton", "LFDQueueFramePartyBackfillBackfillButton", "LFDQueueFramePartyBackfillNoBackfillButton", "ChannelFrameDaughterFrameOkayButton", "ChannelFrameDaughterFrameCancelButton", "PendingListInfoFrameContinueButton", "LFDQueueFrameNoLFDWhileLFRLeaveQueueButton", "InterfaceOptionsHelpPanelResetTutorials", "RaidFinderFrameFindRaidButton", "RaidFinderQueueFrameIneligibleFrameLeaveQueueButton", "SideDressUpModelResetButton", "RaidFinderQueueFramePartyBackfillBackfillButton", "RaidFinderQueueFramePartyBackfillNoBackfillButton", "ScrollOfResurrectionSelectionFrameAcceptButton", "ScrollOfResurrectionSelectionFrameCancelButton", "ScrollOfResurrectionFrameAcceptButton", "ScrollOfResurrectionFrameCancelButton", "HelpFrameReportBugSubmit", "HelpFrameSubmitSuggestionSubmit", "ReportPlayerNameDialogReportButton", "ReportPlayerNameDialogCancelButton", "ReportCheatingDialogReportButton", "ReportCheatingDialogCancelButton", "HelpFrameOpenTicketHelpItemRestoration"}
 		for i = 1, #buttons do
 		local reskinbutton = _G[buttons[i]]
 			if reskinbutton then
@@ -4029,7 +4029,7 @@ local function styleCore()
 			local editBox = frame:GetChildren()
 			if editBox and editBox:GetObjectType() == "EditBox" and editBox:GetText() == "http://www.deadlybossmods.com" and not frame.styled then
 				F.CreateBD(frame)
-
+		
 				select(6, editBox:GetRegions()):Hide()
 				select(7, editBox:GetRegions()):Hide()
 				select(8, editBox:GetRegions()):Hide()
@@ -4044,7 +4044,7 @@ local function styleCore()
 			end
 		end
 	end)
---]]
+--]]	
 end
 
 local function styleGUI()
@@ -4148,12 +4148,12 @@ local function KillTex(object, kill)
 				region:SetTexture(nil)
 			end
 		end
-	end
+	end		
 end
 
 local function CreateBackdrop(f, t, tex)
 	if f.backdrop then return end
-
+	
 	local b = CreateFrame("Frame", nil, f)
 	b:SetPoint("TOPLEFT", -2, 2)
 	b:SetPoint("BOTTOMRIGHT", 2, -2)
@@ -4164,7 +4164,7 @@ local function CreateBackdrop(f, t, tex)
 	else
 		b:SetFrameLevel(0)
 	end
-
+	
 	f.backdrop = b
 end
 local function SkinCheckBox(frame)
@@ -4172,11 +4172,11 @@ local function SkinCheckBox(frame)
 	CreateBackdrop(frame)
 	frame.backdrop:SetPoint("TOPLEFT", 4, -4)
 	frame.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
-
+	
 	if frame.SetCheckedTexture then
 		frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	end
-
+	
 	frame:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 end
 
@@ -4186,8 +4186,8 @@ local function SkinCloseButton(f, SetPoint)
 		if region:GetObjectType() == "Texture" then
 			region:SetDesaturated(1)
 		end
-	end
-
+	end	
+	
 	if SetPoint then
 		f:SetPoint("TOPRIGHT", SetPoint, "TOPRIGHT", -4, -4)
 	end
@@ -4329,14 +4329,14 @@ WorldMapDetailFrame.backdrop:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() -
 SkinCloseButton(WorldMapFrameCloseButton)
 SkinCloseButton(WorldMapFrameSizeDownButton)
 SkinCloseButton(WorldMapFrameSizeUpButton)
-
+									
 F.ReskinDropDown(WorldMapLevelDropDown)
 --Mini
 local function SmallSkin()
 	if InCombatLockdown() then return; end
 
 		WorldMapFrameSizeUpButton:Show()
-		WorldMapFrameSizeDownButton:Hide()
+		WorldMapFrameSizeDownButton:Hide()	
 end
 --[[
 	WorldMapLevelDropDown:ClearAllPoints()
@@ -4348,7 +4348,7 @@ end
 end
 --]]
 
-
+			
 --Large
 
 local function LargeSkin()
@@ -4357,17 +4357,17 @@ local function LargeSkin()
 		WorldMapFrame:EnableKeyboard(false)
 		WorldMapFrame:SetScale(1)
 		WorldMapFrame:EnableMouse(true)
-
+	
 	if WorldMapFrame:GetAttribute('UIPanelLayout-area') ~= 'center' then
 		SetUIPanelAttribute(WorldMapFrame, "area", "center");
 	end
-
+	
 	if WorldMapFrame:GetAttribute('UIPanelLayout-allowOtherPanels') ~= true then
-		SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
+		SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)	
 	end
 
 		WorldMapFrameSizeUpButton:Hide()
-		WorldMapFrameSizeDownButton:Show()
+		WorldMapFrameSizeDownButton:Show()	
 
 		WorldMapFrame:ClearAllPoints()
 		WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 100)
@@ -4385,29 +4385,29 @@ local function QuestSkin()
 		SetUIPanelAttribute(WorldMapFrame, "area", "center");
 		SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
 	end
-
+				
 	WorldMapFrame.backdrop:ClearAllPoints()
 	WorldMapFrame.backdrop:SetPoint("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
-	WorldMapFrame.backdrop:SetPoint("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235)
-
+	WorldMapFrame.backdrop:SetPoint("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235)  
+				
 	if not WorldMapQuestDetailScrollFrame.backdrop then
 		CreateBackdrop(WorldMapQuestDetailScrollFrame)
 		WorldMapQuestDetailScrollFrame.backdrop:SetPoint("TOPLEFT", -22, 2)
 		WorldMapQuestDetailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 23, -4)
 	end
-
+				
 	if not WorldMapQuestRewardScrollFrame.backdrop then
 		CreateBackdrop(WorldMapQuestRewardScrollFrame)
-		WorldMapQuestRewardScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 22, -4)
+		WorldMapQuestRewardScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 22, -4)				
 	end
-
+				
 	if not WorldMapQuestScrollFrame.backdrop then
 		CreateBackdrop(WorldMapQuestScrollFrame)
 		WorldMapQuestScrollFrame.backdrop:SetPoint("TOPLEFT", 0, 2)
-		WorldMapQuestScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 24, -3)
+		WorldMapQuestScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 24, -3)				
 	end
-end
-
+end			
+			
 local function FixSkin()
 	KillTex(WorldMapFrame)
 	if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
@@ -4415,7 +4415,7 @@ local function FixSkin()
 	elseif WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
 		SmallSkin()
 	end
-
+	
 	if not InCombatLockdown() then
 		WorldMapFrame:SetScale(1)
 		WorldMapFrameSizeDownButton:Show()
@@ -4423,28 +4423,28 @@ local function FixSkin()
 	else
 		WorldMapFrameSizeDownButton:Disable()
 		WorldMapFrameSizeUpButton:Disable()
-	end
-
+	end	
+				
 	WorldMapFrameAreaLabel:SetFont(Qulight["media"].font, 50, "OUTLINE")
 	WorldMapFrameAreaLabel:SetShadowOffset(2, -2)
-	WorldMapFrameAreaLabel:SetTextColor(0.90, 0.8294, 0.6407)
-
+	WorldMapFrameAreaLabel:SetTextColor(0.90, 0.8294, 0.6407)	
+				
 	WorldMapFrameAreaDescription:SetFont(Qulight["media"].font, 40, "OUTLINE")
-	WorldMapFrameAreaDescription:SetShadowOffset(2, -2)
-
+	WorldMapFrameAreaDescription:SetShadowOffset(2, -2)	
+				
 	WorldMapZoneInfo:SetFont(Qulight["media"].font, 27, "OUTLINE")
-	WorldMapZoneInfo:SetShadowOffset(2, -2)
+	WorldMapZoneInfo:SetShadowOffset(2, -2)		
 end
-
+			
 WorldMapFrame:HookScript("OnShow", FixSkin)
 hooksecurefunc("WorldMap_ToggleSizeUp", LargeSkin)
 hooksecurefunc("WorldMap_ToggleSizeDown", FixSkin)
-
+			
 WorldMapFrame:RegisterEvent("PLAYER_LOGIN")
 WorldMapFrame:HookScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then
 		if not GetCVarBool("miniWorldMap") then
-			ToggleFrame(WorldMapFrame)
+			ToggleFrame(WorldMapFrame)				
 			ToggleFrame(WorldMapFrame)
 		end
 	end
@@ -4478,7 +4478,7 @@ Delay:SetScript("OnEvent", function()
 		FloatingBattlePetTooltip.Delimiter:SetHeight(1)
 		F.ReskinClose(FloatingBattlePetTooltip.CloseButton)
 		F.ReskinClose(FloatingPetBattleAbilityTooltip.CloseButton)
-
+	
 	local bubbleHook = CreateFrame("Frame")
 
 		local function styleBubble(frame)
@@ -4665,7 +4665,7 @@ local function GetProfessionRank(currentSkill)
 	if currentSkill <= 74 then
 		return APPRENTICE
 	end
-
+	
 	for index = #ranks, 1, -1 do
 		local requiredSkill, title = ranks[index][1], ranks[index][2]
 
@@ -4816,7 +4816,7 @@ end
 
 local function SkinTab(f, t)
 	f:Show()
-
+	
 		StripTextures(f)
 		f:SetNormalTexture(t)
 		f:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -4838,7 +4838,7 @@ local function STHookFrame(fname)
 	SkinTab(frametabs["PVPUIFrame"], "Interface\\BattlefieldFrame\\UI-Battlefield-Icon")
 
 	frametabs["PVPUIFrame"]:SetPoint("TOPLEFT", frame, "TOPRIGHT", 5, -35)
-
+	
 	frametabs["PVPUIFrame"].tooltip = PLAYER_V_PLAYER
 	frametabs["PVPUIFrame"].ToggleFrame = "PVPUIFrame"
 	frametabs["PVPUIFrame"]:SetScript("OnClick", Tab_OnClick)
